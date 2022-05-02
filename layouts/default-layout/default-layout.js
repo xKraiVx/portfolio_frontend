@@ -13,7 +13,7 @@ export const DefaultLayout = ({ headerData, title, children }) => {
 
     return ( 
         <div className={styles.layout}>
-            <Header data={headerData} isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />
+            {headerData && <Header data={headerData} isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />}
             <main>
                 {headerData && <BurgerMenu data={headerData} isOpenDrawer={openDrawer} onClose={toggleDrawer} />}
                 {children}
