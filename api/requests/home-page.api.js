@@ -11,7 +11,7 @@ const getHomePage = async () => {
 
     try{
         const res = await customAxios.get(`/api/home-page?${query}`)
-        return res?.data;
+        return res;
     } catch (error) {
         return error;
     }
