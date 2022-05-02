@@ -10,10 +10,10 @@ import { headerApi } from '../api/requests/header.api';
 
 
 
-export default function Home({ /* pageData,  */headerData = null}) {
-  /* const title = pageData?.attributes?.Title; */
+export default function Home({ pageData/* , headerData */}) {
+  const title = pageData?.attributes?.Title;
   return (
-    <DefaultLayout /* headerData={headerData} */ title={'test'}>
+    <DefaultLayout /* headerData={headerData} */ title={title}>
       <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
@@ -22,7 +22,7 @@ export default function Home({ /* pageData,  */headerData = null}) {
         </Head>
 
         <main className={styles.main}>
-          {/* {title && <h1>Test</h1>} */}
+          {title && <h1>Test</h1>}
         </main>
       </div>
     </DefaultLayout>
@@ -49,16 +49,14 @@ export default function Home({ /* pageData,  */headerData = null}) {
 
 export async function getStaticProps(context) {
 
-  /* const pageData = await homePageApi.getHomePage() */
+  const pageData = await homePageApi.getHomePage()
 
-  const headerData = await headerApi.getHeader()
-
-  console.log(headerData);
+  /* const headerData = await headerApi.getHeader() */
 
   return {
     props: {
-      headerData/* ,
-      pageData */
+      /* headerData, */
+      pageData
     },
     revalidate: 60
   }
