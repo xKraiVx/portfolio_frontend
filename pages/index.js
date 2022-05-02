@@ -22,7 +22,7 @@ export default function Home({ /* pageData,  */headerData }) {
         </Head>
 
         <main className={styles.main}>
-          {title && <h1>Test</h1>}
+          {/* {title && <h1>Test</h1>} */}
         </main>
       </div>
     </DefaultLayout>
