@@ -13,7 +13,7 @@ import { headerApi } from '../api/requests/header.api';
 export default function Home({ /* pageData,  */headerData = null}) {
   /* const title = pageData?.attributes?.Title; */
   return (
-    <DefaultLayout headerData={headerData} title={'test'}>
+    <DefaultLayout /* headerData={headerData} */ title={'test'}>
       <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
