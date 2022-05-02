@@ -8,10 +8,10 @@ import { homePageApi } from '../api/requests/home-page.api';
 import styles from '../styles/Home.module.css'
 import { headerApi } from '../api/requests/header.api';
 
-export default function Home({ pageData, headerData }) {
+export default function Home({ pageData/* , headerData */ }) {
   const title = pageData?.attributes?.Title;
   return (
-    <DefaultLayout headerData={headerData} title={title}>
+    <DefaultLayout /* headerData={headerData} */ title={title}>
       <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
@@ -34,7 +34,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      headerData,
+      /* headerData, */
       pageData
     },
     revalidate: 1
