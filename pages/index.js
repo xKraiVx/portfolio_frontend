@@ -10,7 +10,7 @@ import { headerApi } from '../api/requests/header.api';
 
 
 
-export default function Home({ /* pageData,  */headerData }) {
+export default function Home({ /* pageData,  */headerData = null}) {
   /* const title = pageData?.attributes?.Title; */
   return (
     <DefaultLayout headerData={headerData} title={'test'}>
@@ -52,6 +52,8 @@ export async function getStaticProps(context) {
   /* const pageData = await homePageApi.getHomePage() */
 
   const headerData = await headerApi.getHeader()
+
+  console.log(headerData);
 
   return {
     props: {
