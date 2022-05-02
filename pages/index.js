@@ -11,7 +11,7 @@ import { headerApi } from '../api/requests/header.api';
 export default function Home({ pageData, headerData }) {
   const title = pageData?.data?.attributes?.Title;
   return (
-    <DefaultLayout /* headerData={headerData} */ title={title}>
+    <DefaultLayout headerData={headerData} title={title}>
       <div className={styles.container}>
         <Head>
           <title>Create Next App</title>
