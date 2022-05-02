@@ -29,13 +29,15 @@ export default function Home({ pageData/* , headerData */ }) {
 
 export const getStaticProps = async () => {
 
-  const pageData = await homePageApi.getHomePage()
-  const headerData = await headerApi.getHeader()
+  const pageRes = homePageApi.getHomePage()
+  const headerRes = headerApi.getHeader()
+
+  const responses = await Promise.all([pageRes, headerRes])
 
   return {
     props: {
-      /* headerData, */
-      pageData
+      pageData: responses[0],
+      headerData: responses[1]
     },
     revalidate: 1
   }
