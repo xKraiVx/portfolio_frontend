@@ -9,7 +9,7 @@ import styles from '../styles/Home.module.css'
 import { headerApi } from '../api/requests/header.api';
 
 export default function Home({ pageData, headerData }) {
-  const title = pageData?.data?.attributes?.Title;
+  const title = pageData?.attributes?.Title;
   return (
     <DefaultLayout headerData={headerData} title={title}>
       <div className={styles.container}>
