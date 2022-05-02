@@ -18,7 +18,7 @@ const getHeader = async () => {
 
     try {
         const res = await customAxios.get(`/api/header?${query}`)
-        return res.data;
+        return res?.data;
     } catch (error) {
         return error;
     }
