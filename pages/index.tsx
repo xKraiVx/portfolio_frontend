@@ -10,13 +10,13 @@ import { DefaultLayout } from '../layouts/default-layout/default-layout';
 
 import styles from '../styles/Home.module.css'
 
-const Page: FunctionComponent = () => {
+const Page: FunctionComponent = ({ pageData }) => {
 
   const {
     data: { homePage, header },
     error,
     isValidating
-  } = useSWR('/api/home-page')
+  } = pageData
 
 
   const title = homePage.data.attributes.title;
@@ -53,9 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      fallback: {
-        '/api/home-page': pageData,
-      }
+      pageData
     },
     revalidate: 60
   }
