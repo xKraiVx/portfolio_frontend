@@ -1,8 +1,15 @@
 import { Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
-export const BurgerMenu = ({ data, isOpenDrawer, onClose }) => {
+interface Props {
+    data: any,
+    isOpenDrawer: boolean,
+    onClose(): void
+}
+
+export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClose }) => {
     const { navigation } = data.attributes;
 
     return (

@@ -12,14 +12,6 @@ const customAxios = axios.create({
 });
 
 const requestHandler = (request) => {
-/*     const jwt = parseCookies().jwt;
-
-    if (!jwt) {
-        Router.push("/authorization");
-    }
-
-    request.headers.Authorization = `Bearer ${jwt}`; */
-
     return request;
 };
 /* const errorHandler = async (error: AxiosError) => {

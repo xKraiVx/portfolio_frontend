@@ -1,15 +1,21 @@
 
-import { useState } from 'react';
-import { BurgerMenu } from '../components/burger-menu/burger-menu.js';
-import { Header } from '../components/header/header.js';
+import { FunctionComponent, ReactNode, useState } from 'react';
+import { BurgerMenu } from '../components/burger-menu/burger-menu';
+import { Header } from '../components/header/header';
 
-export const DefaultLayout = ({ headerData, title, children }) => {
+interface Props {
+    headerData: any,
+    title: string,
+    children: ReactNode | ReactNode[]
+}
+
+export const DefaultLayout: FunctionComponent<Props> = ({ headerData, title, children }) => {
 
     const [openDrawer, setOpenDrawer] = useState(false);
 
     const toggleDrawer = () => setOpenDrawer(prevState => !prevState);
 
-    return ( 
+    return (
         <div>
             {headerData && <Header data={headerData} isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />}
             <main>
@@ -17,6 +23,5 @@ export const DefaultLayout = ({ headerData, title, children }) => {
                 {children}
             </main>
         </div>
-     );
+    );
 }
- 

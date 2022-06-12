@@ -3,15 +3,64 @@ import { customAxios } from '../index';
 
 const getHomePage = async () => {
 
-    const query = qs.stringify({
-        fields: ["title"]
-    }, {
-        encodeValuesOnly: true,
-    })
+    const query = `
+    query getHome {
+        homePage{
+            data{
+            attributes{
+            title
+            }
+        }
+        }
+        header{
+            data{
+              attributes{
+                navigation{
+                  ... on ComponentComponentsLink{
+                    text,
+                    icon{
+                      data{
+                        attributes{
+                          url,
+                          alternativeText
+                        }
+                      }
+                    },
+                    href
+                  }
+                }
+                logo{
+                  image{
+                    data{
+                      attributes{
+                        url
+                        alternativeText
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        }
+    }
+`
+    const body = {
+        query
+    }
 
-    try{
-        const res = await customAxios.get(`/api/home-page?${query}`)
-        return res?.data;
+    const options = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const res = await customAxios.post("http://localhost:1337/graphql", body, options)
+
+        const data = await res.data;
+
+        return data;
+
     } catch (error) {
         return error;
     }
