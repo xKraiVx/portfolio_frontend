@@ -3,6 +3,8 @@ import { customAxios } from '../index';
 
 const getHomePage = async () => {
 
+  const path = process.env.BACK_URL
+
     const query = `
     query getHome {
         homePage{
@@ -55,7 +57,7 @@ const getHomePage = async () => {
     }
 
     try {
-        const res = await customAxios.post("http://localhost:1337/graphql", body, options)
+        const res = await customAxios.post(`http://localhost:1337/graphql`, body, options)
 
         const data = await res.data;
 

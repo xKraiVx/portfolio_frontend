@@ -4,25 +4,21 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next/types';
 
 import useSWR, { SWRConfig } from 'swr';
+import { homePageHooks } from '../api/hooks/home-page.api-hooks';
 import { homePageApi } from '../api/requests/home-page.api';
 
 import { DefaultLayout } from '../layouts/default-layout/default-layout';
 
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
 
-const Page: FunctionComponent = ({ pageData }) => {
+const Page: FunctionComponent<any> = () => {
+  const { data, error, isValidating } = homePageHooks.useGetHomePageQuery()
+  const { homePage, header } = data
 
-  const {
-    data: { homePage, header },
-    error,
-    isValidating
-  } = pageData
-
-
-  const title = homePage.data.attributes.title;
+  const title = homePage?.data?.attributes?.title;
 
   return (
-    <DefaultLayout headerData={header.data} title={title}>
+    <DefaultLayout headerData={header?.data} title={title}>
       <div className={styles.container}>
         <Head>
           <title>{title}</title>
@@ -49,12 +45,17 @@ export default function Home({ fallback }) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  const pageData = await homePageApi.getHomePage()
+  const { homePage, header } = await homePageApi.getHomePage()
 
   return {
     props: {
-      pageData
+      fallback: {
+        '/api/home-page/': {
+          homePage,
+          header
+        }
+      }
     },
-    revalidate: 60
+    revalidate: 1
   }
 }
