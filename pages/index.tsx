@@ -11,12 +11,10 @@ import { DefaultLayout } from '../layouts/default-layout/default-layout';
 
 import styles from '../styles/Home.module.scss'
 
-const Page: FunctionComponent<any> = () => {
-  const { data, error, isValidating } = homePageHooks.useGetHomePageQuery()
-  const { homePage, header } = data
+const Home: FunctionComponent<any>  = ({ homePage, header }) => {
 
   const title = homePage?.data?.attributes?.title;
-
+  
   return (
     <DefaultLayout headerData={header?.data} title={title}>
       <div className={styles.container}>
@@ -32,16 +30,9 @@ const Page: FunctionComponent<any> = () => {
       </div>
     </DefaultLayout>
   )
-
 }
 
-export default function Home({ fallback }) {
-  return (
-    <SWRConfig value={{ fallback }}>
-      <Page />
-    </SWRConfig>
-  )
-}
+export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
 
@@ -49,12 +40,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      fallback: {
-        '/api/home-page/': {
-          homePage,
-          header
-        }
-      }
+      homePage, 
+      header
     },
     revalidate: 1
   }

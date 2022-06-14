@@ -57,7 +57,7 @@ const getHomePage = async () => {
     }
 
     try {
-        const res = await customAxios.post(`http://localhost:1337/graphql`, body, options)
+        const res = await customAxios.post(`${path}/graphql`, body, options)
 
         const data = await res.data;
 
