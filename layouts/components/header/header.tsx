@@ -7,16 +7,13 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import NextImage from '../../../common/components/next-image/next-image';
-
 interface Props {
-    data: any,
     title: string,
     isOpenDrawer: boolean,
     toggleDrawer(): void
 }
 
-export const Header: FunctionComponent<Props> = ({ data, title, isOpenDrawer, toggleDrawer = () => { } }) => {
+export const Header: FunctionComponent<Props> = ({ title, toggleDrawer = () => { } }) => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>

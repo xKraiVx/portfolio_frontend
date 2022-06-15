@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": [
       "dom",
@@ -17,7 +18,20 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@hooks": ["api/hooks"],
+      "@requests": ["api/requests"],
+      "@cms": ["cms"],
+      "@cms/*": ["cms/*"],
+      "@common": ["common"],
+      "@common/*": ["common/*"],
+      "@assets/*": ["assets/*"],
+      "@features/*": ["features/*"],
+      "@layouts/*": ["layouts/*"],
+      "@styles": ["styles"],
+      "@styles/*": ["styles/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -1,11 +1,10 @@
-import qs from 'qs';
-import { customAxios } from '../index';
+import { normalizeHomePageData } from '@common/utils/normalize';
+import { axiosDecorator } from '../index';
+import { HomePageStrapi } from '@cms/types/home-page';
 
 const getHomePage = async () => {
 
-  const path = process.env.BACK_URL
-
-    const query = `
+  const query = `
     query getHome {
         homePage{
             data{
@@ -46,28 +45,15 @@ const getHomePage = async () => {
         }
     }
 `
-    const body = {
-        query
-    }
 
-    const options = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    try {
-        const res = await customAxios.post(`${path}/graphql`, body, options)
-
-        const data = await res.data;
-
-        return data;
-
-    } catch (error) {
-        return error;
-    }
+  try {
+    const data = await axiosDecorator(query) as HomePageStrapi
+    return normalizeHomePageData(data)
+  } catch (error) {
+    return error;
+  }
 }
 
 export const homePageApi = {
-    getHomePage
+  getHomePage
 }

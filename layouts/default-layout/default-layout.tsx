@@ -1,10 +1,11 @@
 
 import { FunctionComponent, ReactNode, useState } from 'react';
-import { BurgerMenu } from '../components/burger-menu/burger-menu';
-import { Header } from '../components/header/header';
+import { HeaderFormated } from '@common/types/header';
+import { BurgerMenu } from '@layouts/components/burger-menu/burger-menu';
+import { Header } from '@layouts/components/header/header';
 
 interface Props {
-    headerData: any,
+    headerData: HeaderFormated,
     title: string,
     children: ReactNode | ReactNode[]
 }
@@ -17,7 +18,7 @@ export const DefaultLayout: FunctionComponent<Props> = ({ headerData, title, chi
 
     return (
         <div>
-            {headerData && <Header data={headerData} isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />}
+            {headerData && <Header isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />}
             <main>
                 {headerData && <BurgerMenu data={headerData} isOpenDrawer={openDrawer} onClose={toggleDrawer} />}
                 {children}

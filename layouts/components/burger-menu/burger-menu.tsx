@@ -2,15 +2,16 @@ import { Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
+import { HeaderFormated } from '@common/types/header';
 
 interface Props {
-    data: any,
+    data: HeaderFormated,
     isOpenDrawer: boolean,
     onClose(): void
 }
 
 export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClose }) => {
-    const { navigation } = data.attributes;
+    const { navigation } = data;
 
     return (
         <Drawer
@@ -23,12 +24,12 @@ export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClo
                 onClick={onClose}
             >
                 <List>
-                    {navigation.map((nav, id) => {
+                    {navigation.map((nav, idx) => {
 
                         const { href, text } = nav;
 
                         return (
-                            <ListItem button key={id}>
+                            <ListItem button key={idx}>
                                 <Link href={href}>
                                     <a>
                                         <ListItemText primary={text} />
@@ -37,14 +38,6 @@ export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClo
                             </ListItem>
                         )
                     })}
-                    {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))} */}
                 </List>
             </Box>
         </Drawer>
