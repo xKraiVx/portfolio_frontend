@@ -1,14 +1,16 @@
 import { HomePWHeroNormalized } from "@common/types/home-page"
-import { FunctionComponent } from "react"
+import { FunctionComponent, useEffect } from "react"
 
 interface Props {
     widgetData: HomePWHeroNormalized
 }
 
-const path = process.env.BACK_URL || 'http://localhost:1337';
+const path = process.env.NEXT_PUBLIC_BACK_URL;
 
 const Hero: FunctionComponent<Props> = ({ widgetData }) => {
     const { title, images } = widgetData
+
+    useEffect(() => console.log(path), [])
 
     return (
         <section>

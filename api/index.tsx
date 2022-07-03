@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const path = process.env.BACK_URL;
+const path = process.env.NEXT_PUBLIC_BACK_URL;
 
 type AxiosDecorator = (query: string) => any
 

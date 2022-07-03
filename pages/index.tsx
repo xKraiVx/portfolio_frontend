@@ -1,15 +1,14 @@
-import { ComponentType, FunctionComponent, ReactNode } from 'react';
-import dynamic, { DynamicOptions } from 'next/dynamic';
+import { FunctionComponent } from 'react';
 import Head from 'next/head'
 import { GetStaticProps } from 'next/types';
-import { HomePNormalized, HomePWNormalized } from '@common/types/home-page';
+import { HomePNormalized } from '@common/types/home-page';
 
 import { homePageApi } from '@requests/home-page.api';
 
 import { DefaultLayout } from '@layouts/default-layout/default-layout';
 
 import styles from '@styles/Home.module.scss'
-import { selectTemplete } from '@features/home/utils/select-template';
+import { selectTemplete } from '@features/home/components/select-template';
 
 
 const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
