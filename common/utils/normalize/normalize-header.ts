@@ -1,8 +1,8 @@
 import { HeaderStrapi } from "../../../cms/types/header"
-import { HeaderFormated } from "../../types/header"
+import { HeaderNormalized } from "../../types/header"
 import { normalizeImageData } from "./normalize-general"
 
-type NormalizeHeaderData = (headerData: HeaderStrapi) => HeaderFormated
+type NormalizeHeaderData = (headerData: HeaderStrapi) => HeaderNormalized
 
 const normalizeHeaderData: NormalizeHeaderData = (headerData) => {
 

@@ -2,10 +2,10 @@ import { Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
-import { HeaderFormated } from '@common/types/header';
+import { HeaderNormalized } from '@common/types/header';
 
 interface Props {
-    data: HeaderFormated,
+    data: HeaderNormalized,
     isOpenDrawer: boolean,
     onClose(): void
 }

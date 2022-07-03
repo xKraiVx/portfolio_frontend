@@ -1,5 +1,5 @@
-import { ImagesCollectionStrapi, ImageStrapi } from "../../../cms/types/general"
-import { ImageNormalized, ImageCollectionNormalized } from "../../types/general"
+import { ImagesCollectionStrapi, ImageStrapi } from "@cms/types/general"
+import { ImageNormalized, ImagesCollectionNormalized } from "@common/types/general"
 
 type NormalizeImageData = (imageData: ImageStrapi) => ImageNormalized
 
@@ -16,7 +16,7 @@ export const normalizeImageData: NormalizeImageData = (imageData) => {
     }
 }
 
-type NormalizeImagesCollectionData = (imageData: ImagesCollectionStrapi) => ImageCollectionNormalized
+type NormalizeImagesCollectionData = (imageData: ImagesCollectionStrapi) => ImagesCollectionNormalized
 
 export const normalizeImagesCollectionData: NormalizeImagesCollectionData = (imagesData) => {
     if (!imagesData?.data) {

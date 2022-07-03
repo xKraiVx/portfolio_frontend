@@ -1,11 +1,11 @@
 
 import { FunctionComponent, ReactNode, useState } from 'react';
-import { HeaderFormated } from '@common/types/header';
+import { HeaderNormalized } from '@common/types/header';
 import { BurgerMenu } from '@layouts/components/burger-menu/burger-menu';
 import { Header } from '@layouts/components/header/header';
 
 interface Props {
-    headerData: HeaderFormated,
+    headerData: HeaderNormalized,
     title: string,
     children: ReactNode | ReactNode[]
 }
