@@ -1,10 +1,10 @@
-import { ImageFormated } from "./general"
+import { ImageNormalized } from "./general"
 
-export interface HeaderFormated {
+export interface HeaderNormalized {
     navigation: {
         text: string,
         href: string,
-        icon: ImageFormated
+        icon: ImageNormalized
     }[],
-    logo: ImageFormated
+    logo: ImageNormalized
 }

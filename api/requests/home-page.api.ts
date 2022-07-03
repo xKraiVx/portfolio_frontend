@@ -1,6 +1,6 @@
 import { normalizeHomePageData } from '@common/utils/normalize';
 import { axiosDecorator } from '../index';
-import { HomePageStrapi } from '@cms/types/home-page';
+import { HomePStrapi } from '@cms/types/home-page';
 
 const getHomePage = async () => {
 
@@ -8,10 +8,25 @@ const getHomePage = async () => {
     query getHome {
         homePage{
             data{
-            attributes{
-            title
+              attributes{
+              title
+              widgets{
+                ... on ComponentHomeWidgetHero{
+                  id
+                  name
+                  title
+                  images{
+                    data{
+                      attributes{
+                        url
+                        alternativeText
+                      }
+                    }
+                  }
+                }
+              }
             }
-        }
+          }
         }
         header{
             data{
@@ -47,7 +62,7 @@ const getHomePage = async () => {
 `
 
   try {
-    const data = await axiosDecorator(query) as HomePageStrapi
+    const data = await axiosDecorator(query) as HomePStrapi
     return normalizeHomePageData(data)
   } catch (error) {
     return error;

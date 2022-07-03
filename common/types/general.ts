@@ -1,4 +1,4 @@
-export interface ImageFormated {
+export interface ImageNormalized {
     name: string
     alternativeText: string
     caption: string
@@ -16,3 +16,5 @@ export interface ImageFormated {
     createdAt: Date
     updatedAt: Date
 }
+
+export type ImagesCollectionNormalized = ImageNormalized[]

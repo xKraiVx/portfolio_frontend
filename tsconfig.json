@@ -22,6 +22,7 @@
     "paths": {
       "@hooks": ["api/hooks"],
       "@requests": ["api/requests"],
+      "@requests/*": ["api/requests/*"],
       "@cms": ["cms"],
       "@cms/*": ["cms/*"],
       "@common": ["common"],

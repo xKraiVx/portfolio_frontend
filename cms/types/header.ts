@@ -1,15 +1,15 @@
-import { StrapiImage } from "./general"
+import { ImageStrapi } from "./general"
 
 export interface HeaderStrapi {
     data: {
         attributes: {
             navigation: {
                 text: string,
-                icon: StrapiImage | null,
+                icon: ImageStrapi | null,
                 href: string
             }[],
             logo: {
-                image: StrapiImage | null
+                image: ImageStrapi | null
             }
         }
     }

@@ -1,7 +1,7 @@
-import { StrapiImage } from "../../../cms/types/general"
-import { ImageFormated } from "../../types/general"
+import { ImagesCollectionStrapi, ImageStrapi } from "../../../cms/types/general"
+import { ImageNormalized, ImageCollectionNormalized } from "../../types/general"
 
-type NormalizeImageData = (imageData: StrapiImage) => ImageFormated
+type NormalizeImageData = (imageData: ImageStrapi) => ImageNormalized
 
 export const normalizeImageData: NormalizeImageData = (imageData) => {
     if (!imageData.data) {
@@ -14,4 +14,18 @@ export const normalizeImageData: NormalizeImageData = (imageData) => {
         alt: formatedData.alternativeText,
         ...formatedData
     }
+}
+
+type NormalizeImagesCollectionData = (imageData: ImagesCollectionStrapi) => ImageCollectionNormalized
+
+export const normalizeImagesCollectionData: NormalizeImagesCollectionData = (imagesData) => {
+    if (!imagesData?.data) {
+        return null
+    }
+
+    const formatedData = imagesData?.data.map(image => ({
+        ...image.attributes
+    }))
+    
+    return formatedData
 }

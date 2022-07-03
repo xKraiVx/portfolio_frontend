@@ -1,16 +1,19 @@
-import { FunctionComponent } from 'react';
-
+import { ComponentType, FunctionComponent, ReactNode } from 'react';
+import dynamic, { DynamicOptions } from 'next/dynamic';
 import Head from 'next/head'
 import { GetStaticProps } from 'next/types';
-import { HomePageFormated } from '../common/types/home-page';
+import { HomePNormalized, HomePWNormalized } from '@common/types/home-page';
 
-import { homePageApi } from '../api/requests/home-page.api';
+import { homePageApi } from '@requests/home-page.api';
 
-import { DefaultLayout } from '../layouts/default-layout/default-layout';
+import { DefaultLayout } from '@layouts/default-layout/default-layout';
 
-import styles from '../styles/Home.module.scss'
+import styles from '@styles/Home.module.scss'
+import { selectTemplete } from '@features/home/utils/select-template';
 
-const Home: FunctionComponent<HomePageFormated>  = ({ title, header }) => {
+
+const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
+
 
   return (
     <DefaultLayout headerData={header} title={title}>
@@ -20,7 +23,7 @@ const Home: FunctionComponent<HomePageFormated>  = ({ title, header }) => {
         </Head>
 
         <main className={styles.main}>
-          {title && <h1>{title}</h1>}
+          {widgets.length && widgets.map(widget => selectTemplete(widget))}
         </main>
       </div>
     </DefaultLayout>
@@ -31,12 +34,13 @@ export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  const { title, header } = await homePageApi.getHomePage()
-  
+  const { title, header, widgets } = await homePageApi.getHomePage()
+
   return {
     props: {
-      title, 
-      header
+      title,
+      header,
+      widgets
     },
     revalidate: 1
   }
