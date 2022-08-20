@@ -4,7 +4,7 @@ import { HomePWNormalized } from "@common/types/home-page"
 
 type DynamicTemplate = (w: HomePWNormalized) => ReactNode
 
-export const selectTemplete: DynamicTemplate = (w) => {
+export const selectTemplate: DynamicTemplate = (w) => {
 
   const templateName = w.name
 

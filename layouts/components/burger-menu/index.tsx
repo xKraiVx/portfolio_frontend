@@ -31,7 +31,7 @@ export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClo
                         return (
                             <ListItem button key={idx}>
                                 <Link href={href}>
-                                    <a>
+                                    <a className="cursor-active">
                                         <ListItemText primary={text} />
                                     </a>
                                 </Link>

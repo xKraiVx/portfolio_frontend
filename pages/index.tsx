@@ -7,8 +7,7 @@ import { homePageApi } from '@requests/home-page.api';
 
 import { DefaultLayout } from '@layouts/default-layout/default-layout';
 
-import styles from '@styles/Home.module.scss'
-import { selectTemplete } from '@features/home/components/select-template';
+import { selectTemplate } from '@features/home/components/select-template';
 
 
 const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
@@ -16,13 +15,13 @@ const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) =>
 
   return (
     <DefaultLayout headerData={header} title={title}>
-      <div className={styles.container}>
+      <div>
         <Head>
           <title>{title}</title>
         </Head>
 
-        <main className={styles.main}>
-          {widgets.length && widgets.map(widget => selectTemplete(widget))}
+        <main>
+          {widgets.length && widgets.map(widget => selectTemplate(widget))}
         </main>
       </div>
     </DefaultLayout>

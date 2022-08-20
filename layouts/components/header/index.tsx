@@ -7,17 +7,23 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import { headerStyles } from './header.theme';
+import { useTheme } from '@mui/material';
+
 interface Props {
     title: string,
     isOpenDrawer: boolean,
     toggleDrawer(): void
 }
 
+
 export const Header: FunctionComponent<Props> = ({ title, toggleDrawer = () => { } }) => {
+    const theme = useTheme();
+    const styles = headerStyles(theme);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <Box sx={styles.root}>
+            <AppBar sx={styles.navigation} className="navigation">
                 <Toolbar>
                     {title && <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         {title}
@@ -33,6 +39,7 @@ export const Header: FunctionComponent<Props> = ({ title, toggleDrawer = () => {
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
+                <Box sx={styles.sun} />
             </AppBar>
         </Box>
     );
