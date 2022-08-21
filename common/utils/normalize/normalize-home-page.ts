@@ -11,8 +11,8 @@ const normalizeHomePageData: NormalizeHomeP = (data) => {
 
     const res = {
         header: normalizeHeaderData(header),
-        title: homePage.data.attributes?.title,
-        widgets: homePage.data.attributes?.widgets.map(widget => normalizeHomePageWidget(widget))
+        title: homePage?.data?.attributes?.title,
+        widgets: homePage?.data?.attributes?.widgets?.map(widget => normalizeHomePageWidget(widget))
     }
 
     return res
@@ -22,12 +22,16 @@ export default normalizeHomePageData
 
 function normalizeHomePageWidget(homePageWidget: HomePWStrapi): HomePWNormalized {
 
+    if (!homePageWidget) {
+        return;
+    }
+
     const {
         id,
         name,
         title,
         images,
-    } = homePageWidget
+    } = homePageWidget;
 
     switch (name) {
         case 'hero':

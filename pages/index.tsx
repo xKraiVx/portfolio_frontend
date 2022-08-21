@@ -9,24 +9,27 @@ import { DefaultLayout } from '@layouts/default-layout/default-layout';
 
 import { selectTemplate } from '@features/home/components/select-template';
 
-const Home: FunctionComponent<HomePNormalized> = ({ title = 'test', header, widgets }) => {
+const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
+
 
   return (
-    <div>
+    <DefaultLayout headerData={header} title={title}>
+      <div>
         <Head>
           <title>{title}</title>
         </Head>
 
         <main>
-         {/*  {widgets.length && widgets.map(widget => selectTemplate(widget))} */}
+          {widgets.length && widgets.map(widget => selectTemplate(widget))}
         </main>
       </div>
+    </DefaultLayout>
   )
 }
 
 export default Home
 
-/* export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
   const { title, header, widgets } = await homePageApi.getHomePage();
 
@@ -38,4 +41,4 @@ export default Home
     },
     revalidate: 1
   }
-} */
+}
