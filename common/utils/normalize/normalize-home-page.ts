@@ -7,11 +7,11 @@ type NormalizeHomeP = (data: HomePStrapi) => HomePNormalized
 
 const normalizeHomePageData: NormalizeHomeP = (data) => {
 
-    const { header, homePage } = data
+    const { header, homePage } = data || {};
 
     const res = {
         header: normalizeHeaderData(header),
-        title: homePage.data.attributes.title,
+        title: homePage.data.attributes?.title,
         widgets: homePage.data.attributes?.widgets.map(widget => normalizeHomePageWidget(widget))
     }
 
