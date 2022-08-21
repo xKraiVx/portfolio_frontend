@@ -132,10 +132,10 @@ float fbm(vec4 p) {
 }
 
 void main() {
-    vec4 p = vec4(vPosition* 3., time * 0.05);
+    vec4 p = vec4(vPosition* 1., time * 0.005);
     float noisy = fbm(p);
     gl_FragColor = vec4(noisy); 
-    vec4 p1 = vec4(vPosition* 2., time * 0.05);
+    vec4 p1 = vec4(vPosition* 2., time * 0.005);
     float spots = max(snoise(p1), 0.);
     gl_FragColor *= mix(1., spots, 0.7);
 }
