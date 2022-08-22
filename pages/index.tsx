@@ -32,9 +32,9 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
 
   const {
-    title = null,
-    header = null,
-    widgets = null
+    title,
+    header,
+    widgets
   } = await homePageApi.getHomePage();
 
   return {
