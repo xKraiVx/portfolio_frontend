@@ -8,10 +8,12 @@ import { homePageApi } from '@requests/home-page.api';
 import { DefaultLayout } from '@layouts/default-layout/default-layout';
 
 import { selectTemplate } from '@features/home/components/select-template';
+import { homePageHooks } from 'api/hooks/home-page.api-hooks';
 
-const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
+const Home: FunctionComponent/* <HomePNormalized> */ = (/* { title, header, widgets } */) => {
 
-
+  const { data } = homePageHooks.useGetHomePageQuery();
+  const { title, header, widgets } = data || {};
   return (
     <DefaultLayout headerData={header} title={title}>
       <div>
@@ -29,7 +31,7 @@ const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) =>
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+/* export const getStaticProps: GetStaticProps = async () => {
 
   const {
     title,
@@ -46,3 +48,4 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 1
   }
 }
+ */
