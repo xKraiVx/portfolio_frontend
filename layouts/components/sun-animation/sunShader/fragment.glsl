@@ -11,17 +11,18 @@ varying vec3 vLayer1;
 varying vec3 vLayer2;
 varying vec3 eyeVector;
 
-
 float PI = 3.141592653589793238;
 
 float Fresnel(vec3 eyeVector, vec3 worldNormal) {
-  return pow(1.0 + dot(eyeVector, worldNormal), 3.0);
+    return pow(1.0 + dot(eyeVector, worldNormal), 3.0);
 }
 
 vec3 brightnessToColor(float b) {
     b *= 0.25;
 
-    return (vec3(b, b * b, b * b * b * b) / 0.2) * 0.6;
+    vec3 sun = vec3(b * .99, b * b * .99, b * b * b * b * .99);
+
+    return (sun / 0.2) * 0.6;
 }
 
 float supersun() {
@@ -37,7 +38,9 @@ float supersun() {
 
 void main() {
     float brightness = supersun();
-    brightness = brightness * 4. + 1.;
+
+    //sun
+    brightness = brightness * 4.5 + 1.;
 
     float fres = Fresnel(eyeVector, vNormal);
     brightness += fres;

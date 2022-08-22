@@ -119,13 +119,13 @@ float snoise(vec4 v) {
 
 float fbm(vec4 p) {
     float sum = 0.;
-    float amp = 1.;
+    float amp = 1.2;
     float scale = 1.;
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < 7; i++){
         sum += snoise(p * scale) * amp;
         p.w += 100.;
-        amp *= 0.9;
-        scale *= 2.;
+        amp *= 0.78;
+        scale *= 2.2;
     }
 
     return sum;

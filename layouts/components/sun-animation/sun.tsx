@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import {
     WebGLCubeRenderTarget,
@@ -23,16 +23,13 @@ import fragmentAroundShader from './aroundShader/fragment.glsl';
 import vertexAroundShader from './aroundShader/vertex.glsl';
 
 interface BoxProps {
-    position?: number[]
+    size?: number
 }
 
-export const Sun: FunctionComponent<BoxProps> = ({ position = [] }) => {
+let timer;
+
+export const Sun: FunctionComponent<BoxProps> = ({ size = 1 }) => {
     const { scene, gl } = useThree();
-    const sun = useRef<JSX.IntrinsicElements["mesh"] | undefined>()
-    const perline = useRef<JSX.IntrinsicElements["mesh"] | undefined>()
-    const around = useRef<JSX.IntrinsicElements["mesh"] | undefined>()
-
-
     const cubeRenderTarget = new WebGLCubeRenderTarget(128, {
         format: RGBAFormat,
         generateMipmaps: true,
@@ -42,71 +39,79 @@ export const Sun: FunctionComponent<BoxProps> = ({ position = [] }) => {
 
     const cubeCamera = new CubeCamera(0.1, 10, cubeRenderTarget);
 
+    const sunUniforms = useMemo(
+        () => ({
+            time: {
+                value: 0
+            },
+            resolution: {
+                value: new Vector2()
+            },
+            uPerlin: {
+                value: null
+            }
+        }),
+        []
+    )
+    const perlinUniforms = useMemo(
+        () => ({
+            time: {
+                value: 0
+            },
+            resolution: {
+                value: new Vector2()
+            },
+        }),
+        []
+    )
+    const aroundUniforms = useMemo(
+        () => ({
+            time: {
+                value: 0
+            },
+            resolution: {
+                value: new Vector2()
+            },
+        }),
+        []
+    )
+
     useFrame((state, delta) => {
-        const timeValue = sun.current?.material?.uniforms.time.value
-
-        if (!timeValue && timeValue !== 0) {
-            return;
-        }
-
         cubeCamera.update(gl, scene);
-        sun.current.material.uniforms.uPerlin.value = cubeRenderTarget.texture;
-        sun.current.material.uniforms.time.value = state.clock.elapsedTime;
-        around.current.material.uniforms.time.value = state.clock.elapsedTime;
+        
+        sunUniforms.uPerlin.value = cubeRenderTarget.texture;
+        sunUniforms.time.value = state.clock.elapsedTime;
+        aroundUniforms.time.value = state.clock.elapsedTime;
     });
 
 
     return (
         <>
-            <mesh name="sun" ref={sun} position={[0, 0, 0]}>
-                <sphereBufferGeometry args={[2, 64, 64]} />
+            <mesh name="sun" position={[0, 0, 0]}>
+                <sphereBufferGeometry args={[size, 64, 64]} />
                 <shaderMaterial
                     side={DoubleSide}
                     fragmentShader={fragmentSunShader}
                     vertexShader={vertexSunShader}
-                    uniforms={{
-                        time: {
-                            value: 0
-                        },
-                        resolution: {
-                            value: new Vector2()
-                        },
-                        uPerlin: {
-                            value: null
-                        }
-                    }}
+                    uniforms={sunUniforms}
                 />
             </mesh>
-            <mesh name="perline" ref={perline} position={[0, 0, 0]}>
-                <sphereBufferGeometry args={[1.9, 64, 64]} />
+            <mesh name="perline" position={[0, 0, 0]}>
+                <sphereBufferGeometry args={[size * 0.9, 64, 64]} />
                 <shaderMaterial
                     side={DoubleSide}
                     fragmentShader={fragmentPerlineShader}
                     vertexShader={vertexPerlineShader}
-                    uniforms={{
-                        time: {
-                            value: 0
-                        },
-                        resolution: {
-                            value: new Vector4()
-                        }
-                    }}
+                    uniforms={perlinUniforms}
                 />
             </mesh>
-            <mesh name="around" ref={around} position={[0, 0, 0]}>
-                <sphereBufferGeometry args={[2.5, 64, 64]} />
+            <mesh name="around" position={[0, 0, 0]}>
+                <sphereBufferGeometry args={[size * 1.1, 64, 64]} />
                 <shaderMaterial
                     side={BackSide}
                     fragmentShader={fragmentAroundShader}
                     vertexShader={vertexAroundShader}
-                    uniforms={{
-                        time: {
-                            value: 0
-                        },
-                        resolution: {
-                            value: new Vector4()
-                        }
-                    }}
+                    uniforms={aroundUniforms}
                 />
             </mesh>
         </>

@@ -19,8 +19,8 @@ export const SunAnimation: FunctionComponent = () => {
             >
                 <ambientLight intensity={1} />
                 <directionalLight intensity={0.5} />
-                <Sun position={[4, 2, 0]} />
-                <OrbitControls autoRotate={false} />
+                <Sun size={1.5} />
+                <OrbitControls/>
             </Canvas>
         </Box>
     )
