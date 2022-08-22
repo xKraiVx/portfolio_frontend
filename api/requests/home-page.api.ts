@@ -1,8 +1,9 @@
 import { normalizeHomePageData } from '@common/utils/normalize';
 import { axiosDecorator } from '../index';
 import { HomePStrapi } from '@cms/types/home-page';
+import { HomePNormalized } from '@common/types/home-page';
 
-const getHomePage = async () => {
+const getHomePage = async (): Promise<HomePNormalized> => {
 
   const query = `
     query getHome {
@@ -62,8 +63,8 @@ const getHomePage = async () => {
 `
 
   try {
-    const data = await axiosDecorator(query) as HomePStrapi
-    return normalizeHomePageData(data)
+    const data = await axiosDecorator(query);
+    return normalizeHomePageData(data);
   } catch (error) {
     return error;
   }

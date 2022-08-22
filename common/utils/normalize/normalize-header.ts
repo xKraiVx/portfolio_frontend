@@ -6,7 +6,7 @@ type NormalizeHeaderData = (headerData: HeaderStrapi) => HeaderNormalized
 
 const normalizeHeaderData: NormalizeHeaderData = (headerData) => {
 
-    const { navigation, logo } = headerData.data.attributes
+    const { navigation, logo } = headerData?.data?.attributes || {};
 
     return {
         navigation: navigation.map(item => ({

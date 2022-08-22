@@ -20,7 +20,7 @@ const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) =>
         </Head>
 
         <main>
-          {widgets.length && widgets.map(widget => selectTemplate(widget))}
+          {widgets?.length && widgets?.map(widget => selectTemplate(widget))}
         </main>
       </div>
     </DefaultLayout>
@@ -31,7 +31,11 @@ export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
 
-  const { title, header, widgets } = await homePageApi.getHomePage();
+  const {
+    title = null,
+    header = null,
+    widgets = null
+  } = await homePageApi.getHomePage();
 
   return {
     props: {
