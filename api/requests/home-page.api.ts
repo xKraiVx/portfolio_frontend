@@ -21,7 +21,9 @@ const getHomePage = async (): Promise<HomePNormalized> => {
                   data{
                     attributes{
                       url,
-                      alternativeText
+                      alternativeText,
+                      width,
+                      height
                     }
                   }
                 },
@@ -29,7 +31,9 @@ const getHomePage = async (): Promise<HomePNormalized> => {
                   data{
                     attributes{
                       url,
-                      alternativeText
+                      alternativeText,
+                      width,
+                      height
                     }
                   }
                 }
@@ -49,7 +53,9 @@ const getHomePage = async (): Promise<HomePNormalized> => {
                 data{
                   attributes{
                     url,
-                    alternativeText
+                    alternativeText,
+                    width,
+                    height
                   }
                 }
               },
@@ -60,8 +66,10 @@ const getHomePage = async (): Promise<HomePNormalized> => {
             image{
               data{
                 attributes{
-                  url
-                  alternativeText
+                  url,
+                  alternativeText,
+                  width,
+                  height
                 }
               }
             }

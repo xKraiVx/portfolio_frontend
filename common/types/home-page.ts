@@ -1,4 +1,4 @@
-import { ImagesCollectionNormalized } from "./general";
+import { ImageNormalized, VideoNormalized } from "./general";
 import { HeaderNormalized } from "./header";
 
 export type HomePWNormalized = HomePWHeroNormalized | TestPWHeroNormalized
@@ -9,10 +9,16 @@ export interface HomePNormalized {
     widgets?: Array<HomePWNormalized>
 }
 
+export interface HomePWHeroSlideNormalized {
+    text: string,
+    video: VideoNormalized,
+    image: ImageNormalized
+}
+
 export interface HomePWHeroNormalized {
     id: string,
     name: 'hero',
-    slides: any
+    slides: HomePWHeroSlideNormalized[]
 }
 
 interface TestPWHeroNormalized {

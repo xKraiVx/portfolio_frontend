@@ -1,7 +1,7 @@
 import { normalizeHeaderData, normalizeImageData } from "."
 import { HomePStrapi, HomePWStrapi } from "../../../cms/types/home-page"
 import { HomePNormalized, HomePWNormalized } from "../../types/home-page"
-import { normalizeImagesCollectionData } from "./normalize-general"
+import { normalizeImagesCollectionData, normalizeMediaData } from "./normalize-general"
 
 type NormalizeHomeP = (data: HomePStrapi) => HomePNormalized
 
@@ -22,33 +22,41 @@ export default normalizeHomePageData
 
 function normalizeHomePageWidget(homePageWidget: HomePWStrapi): HomePWNormalized {
 
-    if (!homePageWidget) {
-        return;
-    }
-    console.log(JSON.stringify(homePageWidget, null, 2));
-    
-    const {
-        id,
-        name,
-        slide
-    } = homePageWidget;
+    const widgetName = homePageWidget?.name;
 
-    switch (name) {
-        case 'hero':
+    const normalizeWidget = {
+        hero: () => {
+            const {
+                id,
+                name,
+                slide
+            } = homePageWidget;
+
+            return {
+                id,
+                name,
+                slides: slide.map(({ text, video, image }) => ({
+                    text,
+                    video: normalizeMediaData(video),
+                    image: normalizeMediaData(image)
+                }))
+            }
+        },
+        /* TO DO: REMOVE test widget */
+        test: () => {
+            const {
+                id,
+                name,
+                slide
+            } = homePageWidget;
+
             return {
                 id,
                 name,
                 slides: slide
             }
-        case 'test':
-            return {
-                id,
-                name,
-                slides: slide
-            }
-        default:
-            const _never: never = homePageWidget
-            return _never
+        }
     }
 
+    return normalizeWidget?.[widgetName]();
 }   

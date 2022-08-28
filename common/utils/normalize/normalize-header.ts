@@ -1,6 +1,6 @@
 import { HeaderStrapi } from "../../../cms/types/header"
 import { HeaderNormalized } from "../../types/header"
-import { normalizeImageData } from "./normalize-general"
+import { normalizeMediaData } from "./normalize-general"
 
 type NormalizeHeaderData = (headerData: HeaderStrapi) => HeaderNormalized
 
@@ -12,9 +12,9 @@ const normalizeHeaderData: NormalizeHeaderData = (headerData) => {
         navigation: navigation.map(item => ({
             text: item.text,
             href: item.href,
-            icon: normalizeImageData(item.icon)
+            icon: normalizeMediaData(item.icon)
         })),
-        logo: normalizeImageData(logo.image)
+        logo: normalizeMediaData(logo.image)
     }
 }
 

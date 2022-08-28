@@ -3,7 +3,7 @@ import { ImageNormalized, ImagesCollectionNormalized } from "@common/types/gener
 
 type NormalizeImageData = (imageData: ImageStrapi) => ImageNormalized
 
-export const normalizeImageData: NormalizeImageData = (imageData) => {
+export const normalizeMediaData: NormalizeImageData = (imageData) => {
     if (!imageData.data) {
         return null
     }
@@ -11,7 +11,6 @@ export const normalizeImageData: NormalizeImageData = (imageData) => {
     const formatedData = imageData.data.attributes
     
     return {
-        alt: formatedData.alternativeText,
         ...formatedData
     }
 }
