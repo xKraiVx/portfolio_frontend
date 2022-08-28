@@ -25,12 +25,12 @@ function normalizeHomePageWidget(homePageWidget: HomePWStrapi): HomePWNormalized
     if (!homePageWidget) {
         return;
     }
-
+    console.log(JSON.stringify(homePageWidget, null, 2));
+    
     const {
         id,
         name,
-        title,
-        images,
+        slide
     } = homePageWidget;
 
     switch (name) {
@@ -38,15 +38,13 @@ function normalizeHomePageWidget(homePageWidget: HomePWStrapi): HomePWNormalized
             return {
                 id,
                 name,
-                title,
-                images: normalizeImagesCollectionData(images)
+                slides: slide
             }
         case 'test':
             return {
                 id,
                 name,
-                title,
-                images: normalizeImagesCollectionData(images)
+                slides: slide
             }
         default:
             const _never: never = homePageWidget

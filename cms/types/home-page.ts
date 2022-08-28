@@ -18,13 +18,11 @@ export interface HomePStrapi {
 interface HomePWHeroStrapi {
     id: string,
     name: 'hero',
-    title?: string
-    images?: ImagesCollectionStrapi
+    slide: any
 }
 
 interface TestPWHeroStrapi {
     id: string,
     name: 'test',
-    title: string
-    images: ImagesCollectionStrapi
+    slide: any
 }

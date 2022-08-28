@@ -1,46 +1,44 @@
 import { FunctionComponent } from 'react';
-
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { headerStyles } from './header.theme';
-import { useTheme } from '@mui/material';
+import { Container, Stack, useTheme, IconButton, Box } from '@mui/material';
+import { HeaderNormalized } from '@common/types/header';
+import { Navigation } from '@common/components/navigation/navigation';
+import { Logo } from '@common/components/logo/logo';
 
 interface Props {
     title: string,
-    isOpenDrawer: boolean,
-    toggleDrawer(): void
+    data: HeaderNormalized
 }
 
 
-export const Header: FunctionComponent<Props> = ({ title, toggleDrawer = () => { } }) => {
+export const Header: FunctionComponent<Props> = ({ title, data, }) => {
     const theme = useTheme();
     const styles = headerStyles(theme);
 
+    const { navigation } = data;
+
     return (
         <Box sx={styles.root}>
-            <AppBar sx={styles.navigation} className="navigation">
-                <Toolbar>
-                    {title && <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        {title}
-                    </Typography>}
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        onClick={toggleDrawer}
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                </Toolbar>
-                <Box sx={styles.sun} />
-            </AppBar>
+            <Container maxWidth={false} disableGutters>
+                <Box
+                    sx={styles.content}
+                >
+                    <Logo />
+                    <Navigation data={navigation} />
+                    <Stack justifyContent="center" alignItems="flex-end">
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MoreHorizIcon />
+                        </IconButton>
+                    </Stack>
+                </Box>
+            </Container>
         </Box>
     );
 }

@@ -6,40 +6,29 @@ import { HeaderNormalized } from '@common/types/header';
 
 interface Props {
     data: HeaderNormalized,
-    isOpenDrawer: boolean,
-    onClose(): void
 }
 
-export const BurgerMenu: FunctionComponent<Props> = ({ data, isOpenDrawer, onClose }) => {
+export const BurgerMenu: FunctionComponent<Props> = ({ data }) => {
     const { navigation } = data;
 
     return (
-        <Drawer
-            anchor='right'
-            open={isOpenDrawer}
-            onClose={onClose}
-        >
-            <Box
-                role="presentation"
-                onClick={onClose}
-            >
-                <List>
-                    {navigation.map((nav, idx) => {
+        <Box role="presentation" >
+            <List>
+                {navigation.map((nav, idx) => {
 
-                        const { href, text } = nav;
+                    const { href, text } = nav;
 
-                        return (
-                            <ListItem button key={idx}>
-                                <Link href={href}>
-                                    <a className="cursor-active">
-                                        <ListItemText primary={text} />
-                                    </a>
-                                </Link>
-                            </ListItem>
-                        )
-                    })}
-                </List>
-            </Box>
-        </Drawer>
+                    return (
+                        <ListItem button key={idx}>
+                            <Link href={href}>
+                                <a className="cursor-active">
+                                    <ListItemText primary={text} />
+                                </a>
+                            </Link>
+                        </ListItem>
+                    )
+                })}
+            </List>
+        </Box>
     );
 }

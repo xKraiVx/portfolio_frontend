@@ -1,4 +1,5 @@
 import { HomePWHeroNormalized } from "@common/types/home-page"
+import { Box, Container, Typography, useTheme } from "@mui/material";
 import { FunctionComponent, useEffect } from "react"
 import { CanvasGallery } from "./canvas-gallery";
 import { heroStyles } from "./hero.theme";
@@ -8,18 +9,27 @@ interface Props {
     widgetData: HomePWHeroNormalized
 }
 
-const path = process.env.NEXT_PUBLIC_BACK_URL;
 
 const Hero: FunctionComponent<Props> = ({ widgetData }) => {
-    const styles = heroStyles()
-    const { title, images } = widgetData
-
-    useEffect(() => console.log(path), [])
-
+    const theme = useTheme();
+    const styles = heroStyles(theme);
+    console.log(widgetData);
+    
     return (
-        <section className={styles.root}>
-            <CanvasGallery images={images} />
-        </section>
+        <Box component="section" sx={styles.root}>
+            <Container>
+                <Box sx={styles.title}>
+                    <Typography variant="h1" sx={styles.title}>
+                    </Typography>
+                    <Typography
+                        variant="h1"
+                        component="span"
+                        sx={styles.shadow}
+                    >
+                    </Typography>
+                </Box>
+            </Container>
+        </Box>
     )
 }
 

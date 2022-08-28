@@ -5,6 +5,7 @@ import { BurgerMenu, Header } from '@layouts/components';
 import { CustomCursor } from '@layouts/components/custom-cursor/custom-cursor';
 import { Box } from '@mui/material';
 import { defaultLayoutStyles } from './default-layout.theme';
+import { Sounds } from '@layouts/components/sounds/sounds';
 
 interface Props {
     headerData: HeaderNormalized,
@@ -15,18 +16,14 @@ interface Props {
 export const DefaultLayout: FunctionComponent<Props> = ({ headerData, title, children }) => {
     const styles = defaultLayoutStyles();
 
-    const [openDrawer, setOpenDrawer] = useState(false);
-
-    const toggleDrawer = () => setOpenDrawer(prevState => !prevState);
-
     return (
         <Box sx={styles.root}>
             <CustomCursor />
-            {headerData && <Header isOpenDrawer={openDrawer} toggleDrawer={toggleDrawer} title={title} />}
+            {headerData && <Header title={title} data={headerData} />}
             <Box>
-                {headerData && <BurgerMenu data={headerData} isOpenDrawer={openDrawer} onClose={toggleDrawer} />}
                 {children}
             </Box>
+            <Sounds />
         </Box>
     );
 }

@@ -1,10 +1,12 @@
 import { ImageNormalized } from "./general"
 
+export type HeaderNavigationItem = {
+    text: string;
+    href: string;
+    icon: ImageNormalized;
+}
+
 export interface HeaderNormalized {
-    navigation: {
-        text: string,
-        href: string,
-        icon: ImageNormalized
-    }[],
-    logo: ImageNormalized
+    navigation: HeaderNavigationItem[];
+    logo: ImageNormalized;
 }

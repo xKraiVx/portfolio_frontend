@@ -21,6 +21,7 @@
     "@react-three/fiber": "^8.0.27",
     "axios": "^0.27.2",
     "babel-plugin-glsl": "^1.0.0",
+    "classnames": "^2.3.1",
     "glsl-noise": "0.0.0",
     "glslify": "^7.1.1",
     "graphql": "^16.4.0",

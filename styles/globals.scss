@@ -1,17 +1,11 @@
+@import '../assets/fonts/fonts.css';
+
 html,
 body {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-.hide-cursor {
-  cursor: none;
-
-  * {
-    cursor: none !important;
-  }
+  font-family: sans-serif;
 }
 
 a {
@@ -19,6 +13,8 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }

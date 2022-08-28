@@ -12,7 +12,7 @@ import theme from "@styles/theme/theme"
 export const SunAnimation: FunctionComponent = () => {
 
     return (
-        <Box sx={{ height: '100vh', background: theme.palette.primary.dark }}>
+        <Box>
             <Canvas
                 shadows
                 camera={{ position: [15, 0, 0], fov: 25 }}
