@@ -40,7 +40,7 @@ export const HeroSlider: FunctionComponent<Props> = ({ slides }) => {
                     if (mouseOver) return
                     timeout = setTimeout(() => {
                         slider.next()
-                    }, 5000)
+                    }, 30000)
                 }
                 slider.on("created", () => {
                     nextTimeout()
