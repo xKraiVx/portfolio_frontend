@@ -1,17 +1,18 @@
 import { ImageNormalized } from "@common/types/general"
 import { Box, SxProps, Theme } from "@mui/material";
 import { FunctionComponent, useEffect, useRef, useState } from "react"
-import { NextImage } from "common/components/next-image/next-image";
 import { imagePuzzleStyles } from "./image-puzzle.theme";
+import cn from 'classnames';
 
 interface Props {
     image: ImageNormalized;
     sx?: SxProps<Theme>;
+    className?: string;
+    cols?: number;
+    randomAnimationDelay?: boolean
 }
 
-const cols = 5;
-
-export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx }) => {
+export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx, className, cols = 5, randomAnimationDelay = true }) => {
     const styles = imagePuzzleStyles();
     const root = useRef<HTMLDivElement>();
     const [imageWrapperSize, setImageWrapperSize] = useState<{
@@ -24,35 +25,57 @@ export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx }) => {
 
     const { width, height } = image || {};
 
-    useEffect(() => {
+    const updateSize = () => {
         const w = root.current.offsetWidth;
         const h = root.current.offsetHeight;
 
-        const isPortrait = (asp) => asp > 1 ? true : false;
         const getAproximatelySize = (value, count) => Math.ceil(value / count / 10) * 10 * count;
         const getValueDividedOnTwo = (value) => value - value % 2;
 
-        const aspectRatio = height / width;
+        const aspectRatioImage = height / width;
+        const aspectRatioWrapper = h / w;
 
-        const isImagePortrait = isPortrait(aspectRatio);
-
-        if (!isImagePortrait) {
-            return setImageWrapperSize({
-                w: getValueDividedOnTwo(Math.ceil(getAproximatelySize(h, cols) / aspectRatio)),
-                h: Math.ceil(getAproximatelySize(h, cols))
-            })
+        const fitPuzzleTo = (v: 'height' | 'width'): void => {
+            if (v === 'height') {
+                setImageWrapperSize({
+                    w: getValueDividedOnTwo(Math.ceil(getAproximatelySize(h, cols) / aspectRatioImage)),
+                    h: Math.ceil(getAproximatelySize(h, cols))
+                })
+                return;
+            }
+            setImageWrapperSize({
+                w: Math.ceil(getAproximatelySize(w, cols)),
+                h: getValueDividedOnTwo(Math.ceil(getAproximatelySize(w, cols) * aspectRatioImage))
+            });
         }
+        if (aspectRatioImage < aspectRatioWrapper) {
+            return fitPuzzleTo('height');
+        }
+        fitPuzzleTo('width');
+    }
 
-        setImageWrapperSize({
-            w: Math.ceil(getAproximatelySize(w, cols)),
-            h: getValueDividedOnTwo(Math.ceil(getAproximatelySize(w, cols) * aspectRatio))
-        });
+    useEffect(() => {
+        updateSize();
 
+        window.addEventListener('resize', updateSize);
+        window.addEventListener('orientationchange', updateSize);
+
+        return () => {
+            window.removeEventListener('resize', updateSize);
+            window.removeEventListener('orientationchange', updateSize);
+        }
     }, [])
 
     const { url } = image
     return (
-        <Box ref={root} sx={{ ...styles.root, ...sx }}>
+        <Box
+            ref={root}
+            sx={{ ...styles.root, ...sx }}
+            className={cn(
+                className,
+                'puzzle__root'
+            )}
+        >
             <Box
                 sx={styles.images}
                 style={{
@@ -60,6 +83,7 @@ export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx }) => {
                     width: !!imageWrapperSize.w ? imageWrapperSize.w : '100%',
                     height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
                 }}
+                className="puzzle__container"
             >
 
                 {[...Array(cols * cols).fill(1)].map((item, idx) => {
@@ -70,8 +94,20 @@ export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx }) => {
                     const leftOffset = (idx - Math.floor(idx / cols) * cols) * imageChunkW;
                     const topOffset = Math.floor(idx / cols) * imageChunkH;
 
+                    const randomDelay = Math.round(Math.random() * 10 * 3) / 10;
+                    
                     return (
-                        <Box key={idx} sx={styles.image_wrapper}>
+                        <Box
+                            key={idx}
+                            sx={styles.image_wrapper}
+                            style={randomAnimationDelay
+                                ?
+                                { animationDelay: `${randomDelay + 3}s` }
+                                :
+                                { animationDelay: '0s' }
+                            }
+                            className="puzzle__img-wrapper"
+                        >
                             <Box
                                 sx={{
                                     ...styles.image,
@@ -82,67 +118,13 @@ export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx }) => {
                                     height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
                                     backgroundPosition: `-${leftOffset}px -${topOffset}px`
                                 }}
+                                className="puzzle__img"
                             />
                         </Box>
                     )
 
                 })}
-                {/* <Box sx={styles.image_wrapper}>
-                    <Box
-                        sx={{
-                            ...styles.image,
-                            backgroundImage: `url(${process.env.NEXT_PUBLIC_BACK_URL + url})`
-                        }}
-                        style={{
-                            width: !!imageWrapperSize.w ? imageWrapperSize.w : '100%',
-                            height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
-                            backgroundPosition: `-0% 0%`
-                        }}
-                    />
-                </Box>
-                <Box sx={styles.image_wrapper}>
-                    <Box
-                        sx={{
-                            ...styles.image,
-                            backgroundImage: `url(${process.env.NEXT_PUBLIC_BACK_URL + url})`
-                        }}
-                        style={{
-                            width: !!imageWrapperSize.w ? imageWrapperSize.w : '100%',
-                            height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
-                            backgroundPosition: `-${imageWrapperSize.w / 2}px 0`
-                        }}
-                    />
-                </Box>
-                <Box sx={styles.image_wrapper}>
-                    <Box
-                        sx={{
-                            ...styles.image,
-                            backgroundImage: `url(${process.env.NEXT_PUBLIC_BACK_URL + url})`
-                        }}
-                        style={{
-                            width: !!imageWrapperSize.w ? imageWrapperSize.w : '100%',
-                            height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
-                            backgroundPosition: `-0% -${imageWrapperSize.h / 2}px`
-                        }}
-                    />
-                </Box>
-                <Box sx={styles.image_wrapper}>
-                    <Box
-                        sx={{
-                            ...styles.image,
-                            backgroundImage: `url(${process.env.NEXT_PUBLIC_BACK_URL + url})`
-                        }}
-                        style={{
-                            width: !!imageWrapperSize.w ? imageWrapperSize.w : '100%',
-                            height: !!imageWrapperSize.h ? imageWrapperSize.h : '100%',
-                            backgroundPosition: `-${imageWrapperSize.w / 2}px -${imageWrapperSize.h / 2}px`
-                        }}
-                    />
-                </Box> */}
-
             </Box>
-        </Box>
+        </Box >
     )
 }
-
-{/* <NextImage media={image} objectFit="cover" /> */ }

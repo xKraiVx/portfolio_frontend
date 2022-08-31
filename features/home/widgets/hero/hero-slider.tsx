@@ -8,6 +8,13 @@ import { useKeenSlider } from 'keen-slider/react'
 
 import cn from 'classnames';
 import { ImagePuzzle } from "@common/components/image-puzzle/image-puzzle";
+import { NextVideo } from "@common/components/next-video/next-video";
+import { StoreMallDirectory } from "@mui/icons-material";
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Autoplay } from "swiper";
+import 'swiper/css';
+import "swiper/css/effect-fade";
 
 /* TO DO: type of SLIDES */
 interface Props {
@@ -17,80 +24,66 @@ interface Props {
 export const HeroSlider: FunctionComponent<Props> = ({ slides }) => {
     const theme = useTheme();
     const styles = heroSliderStyles(theme);
-    const [opacities, setOpacities] = useState<number[]>([])
 
-    const [sliderRef] = useKeenSlider<HTMLDivElement>(
-        {
-            slides: slides.length,
-            loop: true,
-            detailsChanged(s) {
-                const new_opacities = s.track.details.slides.map((slide) => slide.portion)
-                setOpacities(new_opacities)
-            },
-        },
-        [
-            (slider) => {
-                let timeout: ReturnType<typeof setTimeout>
-                let mouseOver = false
-                function clearNextTimeout() {
-                    clearTimeout(timeout)
-                }
-                function nextTimeout() {
-                    clearTimeout(timeout)
-                    if (mouseOver) return
-                    timeout = setTimeout(() => {
-                        slider.next()
-                    }, 30000)
-                }
-                slider.on("created", () => {
-                    nextTimeout()
-                })
-                slider.on("dragStarted", clearNextTimeout)
-                slider.on("animationEnded", nextTimeout)
-                slider.on("updated", nextTimeout)
-            },
-        ]
-    )
 
     return (
-        <Box ref={sliderRef} className="fader" sx={styles.slider}>
-            {slides.map((slide, idx) => (
-                <Box
-                    className={cn(
-                        "fader__slide",
-                        {
-                            'active': opacities[idx] === 1
-                        }
-                    )}
-                    key={`slide_${idx}`}
-                    sx={styles.slide}
-                    style={{ opacity: opacities[idx] }}
-                >
-                    <Container sx={styles.slide_wrapper}>
-                        <Box className="title-wrapper">
-                            <Typography
-                                component={idx === 0 ? 'h1' : 'h2'}
-                                variant="h1"
-                                className="title"
-                                sx={styles.title}
-                            >
-                                {slide.text}
-                            </Typography>
+        <Box className="fader" sx={styles.slider}>
+            <Swiper
+                spaceBetween={0}
+                slidesPerView={1}
+                effect={"fade"}
+                loop={true}
+                autoplay={{
+                    delay: 10000,
+                    disableOnInteraction: false,
+                }}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+                modules={[EffectFade, Autoplay]}
+            >
+                {slides.map((slide, idx) => (
+                    <SwiperSlide key={`slide_${idx}`}>
+                        <Box
+                            className={cn(
+                                "fader__slide"
+                            )}
+                            sx={styles.slide}
+                        >
+                            <NextVideo
+                                video={slide.video}
+                                sx={styles.video}
+                                controls={false}
+                                loop={true}
+                                autoPlay={true}
+                            />
+                            <ImagePuzzle image={slide.image} sx={styles.puzzle} />
+                            <Container sx={styles.slide_wrapper}>
+                                <Box className="title-wrapper">
+                                    <Typography
+                                        component={idx === 0 ? 'h1' : 'h2'}
+                                        variant="h1"
+                                        className="title"
+                                        sx={styles.title}
+                                    >
+                                        {slide.text}
+                                    </Typography>
+                                </Box>
+                                <Box className="shadow-wrapper">
+                                    <Typography
+                                        variant="h1"
+                                        component="span"
+                                        className="shadow"
+                                        sx={styles.shadow}
+                                    >
+                                        {slide.text}
+                                    </Typography>
+                                </Box>
+                            </Container>
                         </Box>
-                        <Box className="shadow-wrapper">
-                            <Typography
-                                variant="h1"
-                                component="span"
-                                className="shadow"
-                                sx={styles.shadow}
-                            >
-                                {slide.text}
-                            </Typography>
-                        </Box>
-                    </Container>
-                    <ImagePuzzle image={slide.image} sx={styles.puzzle}/>
-                </Box>
-            ))}
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+
         </Box>
     )
 }

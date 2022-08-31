@@ -1,7 +1,10 @@
-import { normalizeHeaderData, normalizeImageData } from "."
+import {
+    normalizeHeaderData,
+    normalizeMediaData,
+    normalizeImagesCollectionData
+} from "."
 import { HomePStrapi, HomePWStrapi } from "../../../cms/types/home-page"
 import { HomePNormalized, HomePWNormalized } from "../../types/home-page"
-import { normalizeImagesCollectionData, normalizeMediaData } from "./normalize-general"
 
 type NormalizeHomeP = (data: HomePStrapi) => HomePNormalized
 
