@@ -15,15 +15,42 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay } from "swiper";
 import 'swiper/css';
 import "swiper/css/effect-fade";
+import { Swiper as SwiperType, SwiperEvents } from "swiper/types";
 
 /* TO DO: type of SLIDES */
 interface Props {
-    slides: HomePWHeroSlideNormalized[]
+    slides: HomePWHeroSlideNormalized[];
+    autoplay?: number;
 }
 
-export const HeroSlider: FunctionComponent<Props> = ({ slides }) => {
+interface ExtendedSwiper extends SwiperType {
+    visibleSlides: HTMLElement[];
+};
+
+let animationTimeout;
+
+export const HeroSlider: FunctionComponent<Props> = ({ slides, autoplay = 10000 }) => {
     const theme = useTheme();
     const styles = heroSliderStyles(theme);
+
+
+    const onSlideChange = (swiper: ExtendedSwiper) => {
+        const currentSlide = swiper.visibleSlides[0],
+            slides = swiper.slides,
+            currentVideo = currentSlide.querySelector('video');
+        clearTimeout(animationTimeout);
+
+        /* slides.forEach(slide => slide.classList.remove('activated-animation')); */
+
+        animationTimeout = setTimeout(() => {
+            currentSlide.classList.add('activated-animation');
+            currentVideo.play();
+        }, autoplay / 5)
+    }
+
+    const onSliderDestroy = () => {
+        clearTimeout(animationTimeout);
+    }
 
 
     return (
@@ -34,11 +61,11 @@ export const HeroSlider: FunctionComponent<Props> = ({ slides }) => {
                 effect={"fade"}
                 loop={true}
                 autoplay={{
-                    delay: 10000,
+                    delay: autoplay,
                     disableOnInteraction: false,
                 }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={onSlideChange}
+                onDestroy={onSliderDestroy}
                 modules={[EffectFade, Autoplay]}
             >
                 {slides.map((slide, idx) => (
@@ -54,7 +81,8 @@ export const HeroSlider: FunctionComponent<Props> = ({ slides }) => {
                                 sx={styles.video}
                                 controls={false}
                                 loop={true}
-                                autoPlay={true}
+                                muted={true}
+                                playsInline={true}
                             />
                             <ImagePuzzle image={slide.image} sx={styles.puzzle} />
                             <Container sx={styles.slide_wrapper}>

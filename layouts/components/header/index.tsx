@@ -5,14 +5,16 @@ import { Container, Stack, useTheme, IconButton, Box } from '@mui/material';
 import { HeaderNormalized } from '@common/types/header';
 import { Navigation } from '@common/components/navigation/navigation';
 import { Logo } from '@common/components/logo/logo';
+import { SubMenu } from '../sub-menu/sub-menu';
 
 interface Props {
-    title: string,
-    data: HeaderNormalized
+    title: string;
+    data: HeaderNormalized;
+    toggleTheme: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 
-export const Header: FunctionComponent<Props> = ({ title, data, }) => {
+export const Header: FunctionComponent<Props> = ({ title, data, toggleTheme }) => {
     const theme = useTheme();
     const styles = headerStyles(theme);
 
@@ -27,15 +29,7 @@ export const Header: FunctionComponent<Props> = ({ title, data, }) => {
                     <Logo />
                     <Navigation data={navigation} />
                     <Stack justifyContent="center" alignItems="flex-end">
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{ mr: 2 }}
-                        >
-                            <MoreHorizIcon />
-                        </IconButton>
+                        <SubMenu toggleTheme={toggleTheme} />
                     </Stack>
                 </Box>
             </Container>

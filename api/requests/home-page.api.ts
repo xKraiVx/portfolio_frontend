@@ -3,11 +3,14 @@ import { axiosDecorator } from '../index';
 import { HomePStrapi } from '@cms/types/home-page';
 import { HomePNormalized } from '@common/types/home-page';
 
-const getHomePage = async (): Promise<HomePNormalized> => {
 
+
+
+const getHomePage = async (locale = 'en') => {
+  
   const query = `
     query getHome {
-      homePage{
+      homePage(locale: "${locale}"){
         data{
           attributes{
           title
@@ -43,7 +46,7 @@ const getHomePage = async (): Promise<HomePNormalized> => {
         }
       }
     }
-    header{
+    header(locale: "${locale}"){
       data{
         attributes{
           navigation{

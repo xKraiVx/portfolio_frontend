@@ -4,25 +4,26 @@ import { HeaderNormalized } from "./header";
 export type HomePWNormalized = HomePWHeroNormalized | TestPWHeroNormalized
 
 export interface HomePNormalized {
-    header: HeaderNormalized,
-    title: string,
-    widgets?: Array<HomePWNormalized>
+    header: HeaderNormalized;
+    title: string;
+    widgets?: Array<HomePWNormalized>;
+    toggleTheme: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 export interface HomePWHeroSlideNormalized {
-    text: string,
-    video: VideoNormalized,
-    image: ImageNormalized
+    text: string;
+    video: VideoNormalized;
+    image: ImageNormalized;
 }
 
 export interface HomePWHeroNormalized {
-    id: string,
-    name: 'hero',
-    slides: HomePWHeroSlideNormalized[]
+    id: string;
+    name: 'hero';
+    slides: HomePWHeroSlideNormalized[];
 }
 
 interface TestPWHeroNormalized {
-    id: string,
-    name: 'test',
-    slides: any
+    id: string;
+    name: 'test';
+    slides: any;
 }

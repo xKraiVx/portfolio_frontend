@@ -1,3 +1,4 @@
+import { isTouchDevice } from "@common/utils/general/is-touch-device";
 import { Box, useTheme } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { customCursorStyles } from "./custom-cursor.theme";
@@ -43,6 +44,12 @@ export const CustomCursor: FunctionComponent = () => {
     }
 
     useEffect(() => {
+        const isTouch = isTouchDevice();
+            
+        if (isTouch) {
+            return;
+        }
+
         document.body.classList.add('hide-cursor');
         document.addEventListener('mousemove', handleMousemove);
         return () => {

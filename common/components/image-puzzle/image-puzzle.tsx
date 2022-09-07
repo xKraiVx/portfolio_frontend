@@ -102,7 +102,7 @@ export const ImagePuzzle: FunctionComponent<Props> = ({ image, sx, className, co
                             sx={styles.image_wrapper}
                             style={randomAnimationDelay
                                 ?
-                                { animationDelay: `${randomDelay + 3}s` }
+                                { animationDelay: `${randomDelay}s` }
                                 :
                                 { animationDelay: '0s' }
                             }

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import Head from 'next/head'
-import { GetStaticProps } from 'next/types';
+import { GetServerSideProps, GetStaticProps } from 'next/types';
 import { HomePNormalized } from '@common/types/home-page';
 
 import { homePageApi } from '@requests/home-page.api';
@@ -10,11 +10,9 @@ import { DefaultLayout } from '@layouts/default-layout/default-layout';
 import { selectTemplate } from '@features/home/components/select-template';
 import { Box } from '@mui/material';
 
-const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) => {
-
-
+const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets, toggleTheme }) => {
   return (
-    <DefaultLayout headerData={header} title={title}>
+    <DefaultLayout headerData={header} title={title} toggleTheme={toggleTheme}>
       <Head>
         <title>{title}</title>
       </Head>
@@ -27,20 +25,19 @@ const Home: FunctionComponent<HomePNormalized> = ({ title, header, widgets }) =>
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const {
     title,
     header,
     widgets
-  } = await homePageApi.getHomePage();
-    
+  } = await homePageApi.getHomePage(locale);
+
   return {
     props: {
       title,
       header,
       widgets
     },
-    revalidate: 1
   }
 }

@@ -8,7 +8,7 @@ export const Logo: FunctionComponent = () => {
             component="p"
             sx={{ fontWeight: 400 }}
         >
-            LOGO
+            <strong>K</strong>r<strong>AI</strong>v
         </Typography>
     )
 }

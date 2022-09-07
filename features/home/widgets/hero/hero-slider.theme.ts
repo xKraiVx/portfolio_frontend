@@ -18,11 +18,12 @@ export const heroSliderStyles = (theme: Theme) => ({
             '& .shadow': {
                 transform: 'translate(-10%, 0)',
             },
-
+        },
+        '& .activated-animation': {
             '& .puzzle__img-wrapper': {
                 animation: `${animatePuzzleItem} 1s ${theme.transitions.easing.easeIn} 10s forwards`,
             }
-        },
+        }
     },
     slide: {
         width: '100%',

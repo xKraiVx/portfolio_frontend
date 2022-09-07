@@ -7,8 +7,9 @@ interface Props {
     sx?: SxProps<Theme>;
     autoPlay?: boolean;
     controls?: boolean;
-    mute?: boolean;
+    muted?: boolean;
     loop?: boolean;
+    playsInline?: boolean;
 }
 
 export const NextVideo: FunctionComponent<Props> = ({
@@ -16,8 +17,9 @@ export const NextVideo: FunctionComponent<Props> = ({
     sx,
     autoPlay = false,
     controls = true,
-    mute = false,
-    loop = false
+    muted = false,
+    loop = false,
+    playsInline = false
 }) => {
     const { url } = video || {};
 
@@ -28,10 +30,10 @@ export const NextVideo: FunctionComponent<Props> = ({
             <video
                 src={`${path}${url}`}
                 controls={controls}
-                muted={autoPlay ? true : mute}
+                muted={autoPlay ? true : muted}
                 autoPlay={autoPlay}
                 loop={loop}
-                playsInline={autoPlay}
+                playsInline={true}
             />
         </Box>
     );

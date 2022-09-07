@@ -11,6 +11,8 @@ interface Props {
 
 
 const Hero: FunctionComponent<Props> = ({ widgetData }) => {
+    console.log(widgetData);
+    
     const theme = useTheme();
     const styles = heroStyles(theme);
     const slides = widgetData.slides;

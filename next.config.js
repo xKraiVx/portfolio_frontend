@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   i18n: {
-    locales: ["en-US"],
-    defaultLocale: "en-US"
+    locales: ["en", "uk-UA"],
+    defaultLocale: "en"
   },
   images: {
     domains: ['localhost'],
