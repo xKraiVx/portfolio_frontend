@@ -1,96 +1,20 @@
-import { normalizeHomePageData } from '@common/utils/normalize';
-import { axiosDecorator } from '../index';
-import { HomePStrapi } from '@cms/types/home-page';
-import { HomePNormalized } from '@common/types/home-page';
+import { axiosDecorator } from "../index";
+import { homeQuery } from "@api/queries/page/home-query";
+import { IHome } from "@cms/types/page/home";
+import { normalizeHome } from "@cms/normalize/page/normalize-home";
+import { getQuery } from "@api/queries";
 
-
-
-
-const getHomePage = async (locale = 'en') => {
-  
-  const query = `
-    query getHome {
-      homePage(locale: "${locale}"){
-        data{
-          attributes{
-          title
-          widgets{
-            ... on ComponentHomeWidgetHero{
-              id
-              name
-              slide {
-                text,
-                video {
-                  data{
-                    attributes{
-                      url,
-                      alternativeText,
-                      width,
-                      height
-                    }
-                  }
-                },
-                image {
-                  data{
-                    attributes{
-                      url,
-                      alternativeText,
-                      width,
-                      height
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    header(locale: "${locale}"){
-      data{
-        attributes{
-          navigation{
-            ... on ComponentComponentsLink{
-              text,
-              icon{
-                data{
-                  attributes{
-                    url,
-                    alternativeText,
-                    width,
-                    height
-                  }
-                }
-              },
-              href
-            }
-          }
-          logo{
-            image{
-              data{
-                attributes{
-                  url,
-                  alternativeText,
-                  width,
-                  height
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
+const getHomePage = async (locale: string = "en") => {
   try {
-    const data = await axiosDecorator(query);
-    return normalizeHomePageData(data);
+    const data = await axiosDecorator<IHome>(
+      getQuery("home", homeQuery(locale))
+    );
+    return normalizeHome(data);
   } catch (error) {
     return error;
   }
-}
+};
 
 export const homePageApi = {
-  getHomePage
-}
+  getHomePage,
+};

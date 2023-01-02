@@ -1,51 +1,43 @@
-import Image from "next/image";
-import { FunctionComponent, ImgHTMLAttributes } from "react";
+import Image, { ImageProps } from "next/image";
+// import { getMedia } from 'common/utils/media/media';
 
-/* const NextImage: FunctionComponent<ImgHTMLAttributes<HTMLImageElement>> = ({ src, width, height, ...props }) => {
-    console.log(`${process.env.NEXT_PUBLIC_BACK_URL}${src}`);
-    
-    return (
-        <Image src={src} width={width} height={height} />
-    );
+//TODO:(HIGHT) Fix image for static or upload images
+
+interface Props extends ImageProps {
+  onLoad?: () => void;
+  className?: string;
 }
 
-export default NextImage; */
+export const NextImage = ({
+  alt,
+  src,
+  onLoad,
+  ...props
+}: Props): JSX.Element => {
+  const path = process.env.NEXT_PUBLIC_BACK_URL || "";
 
-import PropTypes from 'prop-types';
+  if (!src) {
+    return <></>;
+  }
 
-import { mediaPropTypes } from 'common/utils/prop-types/prop-types';
-import { getStrapiMedia } from 'common/utils/media/media';
+  let isUploadedImage = false;
 
+  if (typeof src === "string") {
+    isUploadedImage = src.includes("/uploads/");
+  }
 
-export const NextImage = ({ media, src = null, onLoad = () => { }, ...props }) => {
+  /* const loader = ({ src, width }: any) => {
+        return getMedia(`${src}?w=${width}`);
+    }; */
 
-    const path = process.env.NEXT_PUBLIC_BACK_URL || '';
-
-    const { url, alternativeText, width, height } = media || {};
-
-    if (!src && !url) {
-        return <></>;
-    }
-    
-    const loader = ({ src, width }) => {
-        return url ? getStrapiMedia(`${src}?w=${width}`) : src;
-    };
-
-    return (
-        <Image
-            onLoad={onLoad}
-            className={props.className}
-            loader={loader}
-            src={url || `${path}${src}`}
-            width={props.width ? props.width : width}
-            height={props.height ? props.height : height}
-            alt={alternativeText || ''}
-            {...props}
-        />
-    );
-};
-
-NextImage.propTypes = {
-    media: mediaPropTypes,
-    className: PropTypes.string,
+  return (
+    <Image
+      onLoad={() => onLoad?.()}
+      className={props.className}
+      // loader={loader}
+      src={!isUploadedImage ? src : `${path}${src}`}
+      alt={alt || ""}
+      {...props}
+    />
+  );
 };

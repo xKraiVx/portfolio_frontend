@@ -1,0 +1,20 @@
+export const mediaQuery = `
+    data{
+        attributes{
+            name
+            alternativeText
+            caption
+            width
+            height
+            formats
+            hash
+            ext
+            mime
+            size
+            url
+            previewUrl
+            provider
+            provider_metadata
+        }
+    }
+`;

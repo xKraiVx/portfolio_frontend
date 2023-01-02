@@ -2,20 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   i18n: {
-    locales: ["en", "uk-UA"],
-    defaultLocale: "en"
+    locales: ["en", "uk"],
+    defaultLocale: "uk",
   },
   images: {
-    domains: ['localhost'],
-    formats: ['image/avif', 'image/webp']
+    domains: ["localhost"],
+    formats: ["image/avif", "image/webp"],
   },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.glsl/,
       type: "asset/source",
-    })
-    return config
+    });
+    return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
