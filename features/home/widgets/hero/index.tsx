@@ -1,27 +1,23 @@
-import { HomePWHeroNormalized } from "@common/types/home-page"
+import { HomePWHeroNormalized } from "@common/types/home-page";
 import { Box, useTheme } from "@mui/material";
-import { FunctionComponent } from "react"
+import { FunctionComponent } from "react";
 import { HeroSlider } from "./hero-slider";
 import { heroStyles } from "./hero.theme";
 
-
 interface Props {
-    widgetData: HomePWHeroNormalized
+  widgetData: HomePWHeroNormalized;
 }
-
 
 const Hero: FunctionComponent<Props> = ({ widgetData }) => {
-    console.log(widgetData);
-    
-    const theme = useTheme();
-    const styles = heroStyles(theme);
-    const slides = widgetData.slides;
+  const theme = useTheme();
+  const styles = heroStyles(theme);
+  const slides = widgetData.slides;
 
-    return (
-        <Box component="section" sx={styles.root}>
-            <HeroSlider slides={slides} />
-        </Box>
-    )
-}
+  return (
+    <Box component="section" sx={styles.root}>
+      <HeroSlider slides={slides} />
+    </Box>
+  );
+};
 
-export default Hero
+export default Hero;

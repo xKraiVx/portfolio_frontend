@@ -9,12 +9,16 @@ import {
 import NextLink from "next/link";
 import { navigationStyles } from "./navigation.theme";
 import { ILinkComponentN } from "@cms/normalized-types/components/link-component-normalized";
+import { useRouter } from "next/router";
+
+import cn from "classnames";
 
 interface Props {
   data?: ILinkComponentN[];
 }
 
 export const Navigation = ({ data }: Props): JSX.Element => {
+  const { pathname } = useRouter();
   const theme = useTheme();
   const styles = navigationStyles(theme);
 
@@ -32,7 +36,7 @@ export const Navigation = ({ data }: Props): JSX.Element => {
             {!!href ? (
               <NextLink href={href}>
                 <Link
-                  className="cursor-active"
+                  className={cn({ "current-link": pathname === href })}
                   sx={styles.link}
                   underline="none"
                 >

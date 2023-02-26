@@ -20,7 +20,6 @@ const axiosDecorator: AxiosDecorator = async (query) => {
   };
 
   const res = await customAxios.post(`${path}/graphql`, body, options);
-
   return await res.data.data;
 };
 

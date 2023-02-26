@@ -4,7 +4,6 @@ import { postApi } from "@api/requests/post.api";
 const Post = ({ data }: any): JSX.Element => {
   const getPost = async () => {
     const test: any = await postApi.getPostPage("en", "test");
-    console.log(test.post.attributes);
 
     return test;
   };

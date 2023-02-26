@@ -24,7 +24,6 @@ export const DefaultLayout = ({
   return (
     <Box sx={styles.root}>
       <Seo data={seo} />
-      <CustomCursor />
       <Header data={headerData} />
       <Box>{children}</Box>
       <Sounds />

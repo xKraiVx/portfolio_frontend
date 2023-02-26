@@ -10,22 +10,8 @@ export interface IPostSlugs {
   };
 }
 
-/* export interface IPostData extends IAttributesWithPublish {
-  Title: string;
-  Slug: string;
-  Content?: string;
-  FeaturedImage?: IStrapiNode<IImageData>;
-  seo?: ISeo;
-  Author?: string;
+export interface IPostPreview {
+  category: any;
+  description?: string;
+  featured_image: any;
 }
-
-export interface IPostsPreviewsData {
-  Title: string;
-  Slug: string;
-  Author?: string;
-  FeaturedImage?: IStrapiNode<IImageData>;
-  createdAt: Date;
-}
-
-export type TPostsPreviews = IStrapiCollectionNode<IPostsPreviewsData>;
-export type TPosts = IStrapiCollectionNode<IPostData>; */

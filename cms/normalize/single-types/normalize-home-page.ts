@@ -1,4 +1,3 @@
-import { IHeaderN } from "@cms/normalized-types/single-types/header-normalized";
 import { IHomePageN } from "@cms/normalized-types/single-types/home-page-normalized";
 import { THomePage } from "@cms/types/single-types/home-page";
 import { normalizeSeo } from "../general/normalize-seo";
