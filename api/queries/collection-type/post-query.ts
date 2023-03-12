@@ -1,5 +1,5 @@
 import { ELocalization } from "@cms/types/general/enums/localization";
-import { POST_PER_PAGE } from "@common/constants/postPerPage";
+import { POST_PER_PAGE } from "@common/constants/postPerPage.constant";
 import { seoQuery } from "../components/shared/seo-query";
 import { mediaQuery } from "../general/media-query";
 
@@ -73,6 +73,14 @@ export const postsQuery = (locale: string, page: number) => `
                         }
                     }
                 }
+            }
+        }
+        meta {
+            pagination {
+                pageSize
+                total
+                pageCount
+                page
             }
         }
     }

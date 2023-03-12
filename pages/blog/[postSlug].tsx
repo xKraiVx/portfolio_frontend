@@ -1,39 +1,100 @@
 import { DefaultLayout } from "@layouts/default-layout/default-layout";
 import { ELocalization } from "@cms/types/general/enums/localization";
 import { postApi } from "@api/requests/post.api";
-const Post = ({ data }: any): JSX.Element => {
-  const getPost = async () => {
-    const test: any = await postApi.getPostPage("en", "test");
+import { blogPageApi } from "@requests/blog-page.api";
+import { EDynamicPageType } from "@common/enums/dynamic-page-type.enum";
+import { Box, Container, Typography } from "@mui/material";
+import PostsList from "@features/widgets/posts-list/posts-list";
+import { IBlogN } from "@cms/normalized-types/page/blog-normalized";
+import { TextEditor } from "@common/components/text-editor/text-editor";
+import { ISinglePostN } from "@cms/normalized-types/page/single-post-normalized.type";
 
-    return test;
-  };
-  getPost();
+type Props =
+  | {
+      data: IBlogN;
+      pageNumber: number;
+      type: EDynamicPageType.BLOG;
+    }
+  | {
+      data: ISinglePostN;
+      type: EDynamicPageType.POST;
+    };
+
+const PostSlug = (props: Props): JSX.Element => {
+  const { type, data } = props;
+
+  if (type === EDynamicPageType.BLOG) {
+    const { header, blogPage, posts } = data;
+    const { seo, title } = blogPage || {};
+
+    return (
+      <DefaultLayout headerData={header} seo={seo}>
+        <Container>
+          <Typography variant="h1">{title}</Typography>
+          <PostsList postsData={posts} currentPage={props.pageNumber} />
+        </Container>
+      </DefaultLayout>
+    );
+  }
+
+  const { post, header } = data;
+  const { title, seo, description } = post;
 
   return (
-    <DefaultLayout>
-      <main>
-        <h1>{data}</h1>
-      </main>
+    <DefaultLayout headerData={header} seo={seo}>
+      <Container>
+        <Typography variant="h1">{title}</Typography>
+        <Box>
+          <TextEditor data={description} />
+        </Box>
+      </Container>
     </DefaultLayout>
   );
 };
 
-export default Post;
+export default PostSlug;
 
 export async function getStaticPaths() {
-  const postSlugs = await postApi.getPostSlugs();
+  const preparePaths = async () => {
+    const blogPagePaths = await Object.values(ELocalization).reduce(
+      async (acc, local) => {
+        const { posts } = await blogPageApi.getBlogPage(local);
 
-  const paths = postSlugs.reduce((acc, postSlug) => {
-    Object.keys(ELocalization).forEach((locale) =>
-      acc.push({
-        params: {
-          postSlug,
-        },
-        locale: ELocalization[locale],
-      })
+        const pages = posts?.pagination?.pageCount || 0;
+        if (pages === 0) {
+          return acc;
+        }
+        for (let pageNumber = 1; pageNumber <= pages; pageNumber++) {
+          (await acc).push({
+            params: {
+              postSlug: `page-${pageNumber}`,
+            },
+            locale: local,
+          });
+        }
+
+        return acc;
+      },
+      Promise.resolve([])
     );
-    return acc;
-  }, []);
+
+    const postSlugs = await postApi.getPostSlugs();
+    const postSlugPaths = postSlugs.reduce((acc, postSlug) => {
+      Object.keys(ELocalization).forEach((locale) =>
+        acc.push({
+          params: {
+            postSlug,
+          },
+          locale: ELocalization[locale],
+        })
+      );
+      return acc;
+    }, []);
+
+    return [...blogPagePaths, ...postSlugPaths];
+  };
+
+  const paths = await preparePaths();
 
   return {
     paths,
@@ -42,10 +103,26 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const data = "";
+  const { params, locale } = context;
+
+  if (params.postSlug.includes("page-")) {
+    const pageNumber = Number(params.postSlug.split("-")[1]);
+    const blogPageData = await blogPageApi.getBlogPage(locale, pageNumber);
+    return {
+      props: {
+        data: blogPageData,
+        type: EDynamicPageType.BLOG,
+        pageNumber,
+      },
+    };
+  }
+
+  const postPageData = await postApi.getPostPage(locale, params.postSlug);
+
   return {
     props: {
-      data,
+      data: postPageData,
+      type: EDynamicPageType.POST,
     },
   };
 }

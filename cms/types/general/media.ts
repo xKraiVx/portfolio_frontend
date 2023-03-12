@@ -1,4 +1,4 @@
-import { IAttributes, IStrapiNode } from "./strapi-node";
+import { IStrapiNode } from "./strapi-node";
 
 export interface IMediaFormat {
   ext: string;
@@ -14,7 +14,7 @@ export interface IMediaFormat {
 
 export type TMediaFormatKey = "medium" | "small" | "thumbnail";
 
-export interface IMediaData extends IAttributes {
+export interface IMediaData {
   name: string;
   alternativeText?: string;
   caption?: string;

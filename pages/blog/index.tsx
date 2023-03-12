@@ -1,16 +1,20 @@
 import { IBlogN } from "@cms/normalized-types/page/blog-normalized";
+import PostsList from "@features/widgets/posts-list/posts-list";
 import { DefaultLayout } from "@layouts/default-layout/default-layout";
+import { Container, Typography } from "@mui/material";
 import { blogPageApi } from "@requests/blog-page.api";
 import { GetStaticProps, NextPage } from "next";
 
 const Blog: NextPage<IBlogN> = (data) => {
-  const { header, blogPage } = data;
+  const { header, blogPage, posts } = data;
   const { seo, title } = blogPage || {};
-  const test = blogPageApi.getBlogPage("en");
 
   return (
     <DefaultLayout headerData={header} seo={seo}>
-      {title}
+      <Container>
+        <Typography variant="h1">{title}</Typography>
+        <PostsList postsData={posts} />
+      </Container>
     </DefaultLayout>
   );
 };

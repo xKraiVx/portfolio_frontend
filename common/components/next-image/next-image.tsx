@@ -12,6 +12,8 @@ export const NextImage = ({
   alt,
   src,
   onLoad,
+  width,
+  height,
   ...props
 }: Props): JSX.Element => {
   const path = process.env.NEXT_PUBLIC_BACK_URL || "";
@@ -30,11 +32,27 @@ export const NextImage = ({
         return getMedia(`${src}?w=${width}`);
     }; */
 
+  if (!width || !height) {
+    return (
+      <Image
+        onLoad={() => onLoad?.()}
+        className={props.className}
+        // loader={loader}
+        layout="fill"
+        src={!isUploadedImage ? src : `${path}${src}`}
+        alt={alt || ""}
+        {...props}
+      />
+    );
+  }
+
   return (
     <Image
       onLoad={() => onLoad?.()}
       className={props.className}
       // loader={loader}
+      width={width}
+      height={height}
       src={!isUploadedImage ? src : `${path}${src}`}
       alt={alt || ""}
       {...props}

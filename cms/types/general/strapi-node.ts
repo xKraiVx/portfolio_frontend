@@ -1,8 +1,8 @@
 export interface IPagination {
-  page: number;
-  pageCount: number;
-  pageSize: number;
-  total: number;
+  pageSize;
+  total;
+  pageCount;
+  page;
 }
 
 export interface IStrapiNodeData<D> {
