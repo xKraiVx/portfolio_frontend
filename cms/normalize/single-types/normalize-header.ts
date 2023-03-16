@@ -1,5 +1,5 @@
 import { IHeaderN } from "@cms/normalized-types/single-types/header-normalized";
-import { THeader } from "@cms/types/single-types/header";
+import { THeader } from "@cms/types/single-types/header.type";
 import { normalizeLogo } from "@cms/normalize/components/normalize-logo";
 import { normalizeLink } from "@cms/normalize/components/normalize-link";
 

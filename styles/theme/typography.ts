@@ -1,75 +1,94 @@
-const fontFamily = [
-    'Raleway',
-    'Roboto',
-    'sans-serif'
-].join(', ');
+import { pxToRem } from "@common/utils/font.utils";
+import { TypographyOptions } from "@mui/material/styles/createTypography";
 
-export const typography = {
-    fontFamily: fontFamily,
-    fontSize: 14,
-    fontWeight: 400,
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    h1: {
-        fontFamily: fontFamily,
-        fontSize: '3rem',
-        lineHeight: 1.5,
-        fontWeight: 900,
-    },
-    h2: {
-        fontFamily: fontFamily,
-        fontSize: '2.5rem',
-        lineHeight: 1.5,
-        fontWeight: 900,
-    },
-    h3: {
-        fontFamily: fontFamily,
-        fontSize: '2rem',
-        lineHeight: 1.5,
-        fontWeight: 900,
-    },
-    h4: {
-        fontFamily: fontFamily,
-        fontSize: '1.5rem',
-        lineHeight: 1.5,
-        fontWeight: 700,
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    bodyL: React.CSSProperties;
+    bodyXl: React.CSSProperties;
+    subtitle3: React.CSSProperties;
+  }
 
-    },
-    h5: {
-        fontFamily: fontFamily,
-        fontSize: '1.2rem',
-        lineHeight: 1.5,
-        fontWeight: 700,
-    },
-    h6: {
-        fontFamily: fontFamily,
-        fontSize: '1.1rem',
-        lineHeight: 1.5,
-        fontWeight: 700,
-    },
-    body1: {
-        fontFamily: fontFamily,
-        fontSize: '1rem',
-        lineHeight: 1.5,
-        fontWeight: 400,
-    },
-    body2: {
-        fontFamily: fontFamily,
-        fontSize: '0.8rem',
-        lineHeight: 1.5,
-        fontWeight: 400,
-    },
-    caption: {
-        fontFamily: fontFamily,
-        fontSize: '0.6rem',
-        lineHeight: 1.5,
-        fontWeight: 400,
-    },
-    button: {
-        fontFamily: fontFamily,
-        fontSize: '1rem',
-        lineHeight: 1.5,
-        fontWeight: 700,
-    }
+  interface TypographyVariantsOptions {
+    bodyL?: React.CSSProperties;
+    bodyXl?: React.CSSProperties;
+    subtitle3?: React.CSSProperties;
+  }
 }
+
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    bodyL: true;
+    bodyXl: true;
+    subtitle3: true;
+  }
+}
+
+const BASE_FONT = "'Blogger sans', sans-serif";
+
+export const typography: TypographyOptions = {
+  fontFamily: BASE_FONT,
+  h1: {
+    fontSize: pxToRem(96),
+    lineHeight: 116 / 96,
+    fontWeight: 700,
+    letterSpacing: 0,
+  },
+  h2: {
+    fontSize: pxToRem(64),
+    lineHeight: 77 / 64,
+    fontWeight: 700,
+  },
+
+  h3: {
+    fontSize: pxToRem(48),
+    lineHeight: 58 / 48,
+    fontWeight: 300,
+  },
+  h4: {
+    fontSize: pxToRem(40),
+    lineHeight: 52 / 40,
+    fontWeight: 500,
+  },
+
+  h5: {
+    fontSize: pxToRem(32),
+    lineHeight: 40 / 32,
+    fontWeight: 600,
+  },
+  h6: {
+    fontSize: pxToRem(24),
+    lineHeight: 32 / 24,
+    fontWeight: 600,
+  },
+  subtitle1: {
+    fontSize: pxToRem(32),
+    lineHeight: 50 / 32,
+    fontWeight: 700,
+  },
+  subtitle2: {
+    fontSize: pxToRem(36),
+    lineHeight: 40 / 36,
+    fontWeight: 600,
+  },
+  body1: {
+    fontSize: pxToRem(16),
+    lineHeight: 24 / 16,
+    fontWeight: 400,
+  },
+  body2: {
+    fontSize: pxToRem(16),
+    lineHeight: 24 / 16,
+    fontWeight: 600,
+  },
+  caption: {
+    fontSize: pxToRem(14),
+    lineHeight: 20 / 14,
+    fontWeight: 400,
+  },
+  button: {
+    fontSize: pxToRem(18),
+    lineHeight: 24 / 18,
+    fontWeight: 600,
+    textTransform: "none" as React.CSSProperties["textTransform"],
+  },
+};

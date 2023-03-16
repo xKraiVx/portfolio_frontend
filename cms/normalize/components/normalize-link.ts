@@ -6,9 +6,9 @@ export const normalizeLink = (data: ILinkComponent): ILinkComponentN => {
   const { href, text, icon, openInNewTab } = data || {};
 
   return {
-    text,
+    text: text || null,
     href,
-    icon: normalizeImage(icon),
-    openInNewTab,
+    icon: normalizeImage(icon) || null,
+    openInNewTab: openInNewTab || null,
   };
 };

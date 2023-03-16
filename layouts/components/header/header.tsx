@@ -14,13 +14,13 @@ export const Header: FunctionComponent<Props> = ({ data }) => {
   const theme = useTheme();
   const styles = headerStyles(theme);
 
-  const { menu } = data || {};
+  const { menu, logo } = data || {};
 
   return (
     <Box sx={styles.root}>
       <Container maxWidth={false} disableGutters>
         <Box sx={styles.content}>
-          <Logo />
+          <Logo data={logo} />
           <Navigation data={menu} />
           <Stack justifyContent="center" alignItems="flex-end">
             <SubMenu />

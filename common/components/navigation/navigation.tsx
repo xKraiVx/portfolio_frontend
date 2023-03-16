@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 import NextLink from "next/link";
 import { navigationStyles } from "./navigation.theme";
-import { ILinkComponentN } from "@cms/normalized-types/components/link-component-normalized";
 import { useRouter } from "next/router";
 
 import cn from "classnames";
+import { ILinkComponentN } from "@cms/normalized-types/components/link-component-normalized";
 
 interface Props {
   data?: ILinkComponentN[];

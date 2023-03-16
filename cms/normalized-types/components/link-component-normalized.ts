@@ -1,8 +1,8 @@
 import { TMediaN } from "../general/media-normalized";
 
 export interface ILinkComponentN {
-  text?: string;
+  text?: string | null;
   href: string;
-  icon?: TMediaN;
-  openInNewTab: boolean;
+  icon?: TMediaN | null;
+  openInNewTab: boolean | null;
 }
