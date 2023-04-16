@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 
 import cn from "classnames";
 import { ILinkComponentN } from "@cms/normalized-types/components/link-component-normalized";
+import { BrainIcon } from "@styles/custom-icons/brain-icon";
 
 interface Props {
   data?: ILinkComponentN[];
@@ -41,6 +42,7 @@ export const Navigation = ({ data }: Props): JSX.Element => {
                   underline="none"
                 >
                   <ListItemText primary={text} />
+                  <Box sx={styles.line} />
                 </Link>
               </NextLink>
             ) : (

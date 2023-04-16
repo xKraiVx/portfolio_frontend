@@ -1,5 +1,4 @@
-import { ITitleAndTextN } from "@cms/normalized-types/page-widgets/title-and-text-normalized";
-import { IHero } from "@cms/types/page-widgets/hero";
+import { IHero } from "@cms/types/widgets/home-widgets/hero.type";
 import { formatWidgetName } from "@common/utils/format-widget-name/format-widget-name";
 import { normalizeImage } from "../general/normalize-image";
 
@@ -7,7 +6,7 @@ import { normalizeImage } from "../general/normalize-image";
 export type TNormilizeTitleAndText = (data: IHero) => any;
 
 export const normalizeHero: TNormilizeTitleAndText = (data) => {
-  const { name, slides } = data || {};
+  const { __typename, slides } = data || {};
 
   const normalizedSlides = slides.map((slide) => {
     const { video, image, text } = slide,
@@ -22,8 +21,8 @@ export const normalizeHero: TNormilizeTitleAndText = (data) => {
   });
 
   return {
-    name: name,
+    name: __typename,
     slides: normalizedSlides,
-    template: formatWidgetName(name),
+    template: formatWidgetName(__typename),
   };
 };

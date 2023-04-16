@@ -4,6 +4,7 @@ export const homeWidgetHeroQuery = `
     ... on ComponentHomeWidgetHero {
         id
         name
+        __typename
         slides {
             text,
             video {

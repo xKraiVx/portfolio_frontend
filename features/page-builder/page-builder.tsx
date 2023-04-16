@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
-import { TWidgetN } from "@cms/normalized-types/page-widgets/widget-normalized";
+import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
 import { Box } from "@mui/material";
+import { log } from "console";
+import { widgetTemplates } from "@features/widgets";
 
 interface Props {
   widgets: TWidgetN[];
@@ -13,15 +15,13 @@ export const PageBuilder: ComponentType<Props> = ({ widgets }) => {
   return (
     <Box component="main">
       {widgets.map((widget, key) => {
-        const template = widget?.name;
+        const template = widget?.template;
 
         if (!template) {
           return null;
         }
 
-        const DynamicTemplate: ComponentType<{ data: typeof widget }> = dynamic(
-          () => import(`features/widgets/${template}/${template}.tsx`)
-        );
+        const DynamicTemplate = widgetTemplates[template];
 
         return <DynamicTemplate key={key} data={widget} />;
       })}

@@ -14,39 +14,39 @@ export const palette: PaletteOptions = {
   primary: { ...PRIMARY, contrastText: GREY[100] },
   secondary: {
     ...SECONDARY,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   info: {
     ...INFO,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   accent: {
     ...ACCENT,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   warning: {
     ...WARNING,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   error: {
     ...ERROR,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   success: {
     ...SUCCESS,
-    contrastText: GREY[100],
+    contrastText: GREY.light,
   },
   grey: { ...GREY },
-  divider: GREY[100],
+  divider: GREY.light,
   background: {
-    paper: GREY[700],
-    default: GREY[700],
-    darken: GREY[900],
-    lighten: GREY[600],
+    paper: SECONDARY.light,
+    default: SECONDARY.light,
+    darken: SECONDARY.light,
+    lighten: SECONDARY.light,
   },
   text: {
-    primary: GREY[200],
-    secondary: GREY[100],
-    disabled: GREY[400],
+    primary: SECONDARY.dark,
+    secondary: SECONDARY.main,
+    disabled: SECONDARY.light,
   },
 };

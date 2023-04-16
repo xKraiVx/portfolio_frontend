@@ -1,15 +1,11 @@
-import { TWidgetN } from "@cms/normalized-types/page-widgets/widget-normalized";
-import { TPageWidget } from "@cms/types/page-widgets/page-widget";
-import { normalizeWidgetsList } from "../page-widgets";
-//TODO: Fix any, rewrite on strapi
-
-const capitalizeFirstLetter = (string: string): string => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
+import { TPageWidget } from "@cms/types/widgets/widget.type";
+import { normalizeWidgetsList } from "../widgets";
+import { formatWidgetName } from "@common/utils/format-widget-name/format-widget-name";
 
 export const normalizeWidgets = (data: TPageWidget[]): TWidgetN[] => {
   const widgets = data?.reduce((acc: TWidgetN[], widget) => {
-    const widgetName = capitalizeFirstLetter(widget.name);
+    const widgetName = formatWidgetName(widget.__typename);
 
     if (!widgetName) {
       return acc;

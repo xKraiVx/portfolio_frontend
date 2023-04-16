@@ -2,8 +2,7 @@ import { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 
 import createEmotionCache from "../utility/createEmotionCache";
-import "../styles/globals.scss";
-
+import "@assets/fonts/fonts.scss";
 import Head from "next/head";
 
 import { UiThemeProvider } from "providers/theme.provider";

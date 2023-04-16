@@ -1,33 +1,33 @@
 import { FunctionComponent } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { headerStyles } from "./header.theme";
+import { localStyles } from "./local.theme";
 import { Container, Stack, useTheme, IconButton, Box } from "@mui/material";
-import { HeaderNormalized } from "@common/types/header";
-import { Navigation } from "@common/components/navigation/navigation";
-import { Logo } from "@common/components/logo/logo";
-import { SubMenu } from "../sub-menu/sub-menu";
+import { Logo } from "@common/components/logo";
+import { BurgerMenu } from "../burger-menu";
+import { IHeaderN } from "@cms/normalized-types/single-types/header-normalized";
 
 interface Props {
-  title: string;
-  data: HeaderNormalized;
+  data?: IHeaderN;
 }
 
-export const Header: FunctionComponent<Props> = ({ title, data }) => {
+export const Header: FunctionComponent<Props> = ({ data }) => {
   const theme = useTheme();
-  const styles = headerStyles(theme);
+  const styles = localStyles(theme);
 
-  const { navigation } = data;
+  const { menu, logo } = data || {};
 
   return (
     <Box sx={styles.root}>
-      <Container maxWidth={false} disableGutters>
-        <Box sx={styles.content}>
-          <Logo />
-          <Navigation data={navigation} />
+      <Container maxWidth={false}>
+        <Stack
+          flexDirection="row"
+          justifyContent="space-between"
+          sx={styles.content}
+        >
+          <Logo data={logo} sx={styles.logo} />
           <Stack justifyContent="center" alignItems="flex-end">
-            <SubMenu />
+            <BurgerMenu data={menu} />
           </Stack>
-        </Box>
+        </Stack>
       </Container>
     </Box>
   );

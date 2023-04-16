@@ -1,5 +1,5 @@
 import { DefaultLayout } from "@layouts/default-layout/default-layout";
-import { ELocalization } from "@cms/types/general/enums/localization";
+import { ELocalization } from "@cms/types/general/enums/localization.enum";
 import { postApi } from "@api/requests/post.api";
 import { blogPageApi } from "@requests/blog-page.api";
 import { EDynamicPageType } from "@common/enums/dynamic-page-type.enum";

@@ -1,6 +1,5 @@
-import { FunctionComponent, ReactNode } from "react";
-import { Header } from "@layouts/components/header/header";
-import { CustomCursor } from "@layouts/components/custom-cursor/custom-cursor";
+import { ReactNode } from "react";
+import { Header } from "@layouts/components/header";
 import { Box } from "@mui/material";
 import { defaultLayoutStyles } from "./default-layout.theme";
 import { Sounds } from "@layouts/components/sounds/sounds";
@@ -15,6 +14,7 @@ interface Props {
   seo?: ISeoN | null;
   children?: ReactNode | ReactNode[];
   footerData?: IFooterN;
+  fixedBackground?: ReactNode;
 }
 
 export const DefaultLayout = ({
@@ -22,6 +22,7 @@ export const DefaultLayout = ({
   footerData,
   seo,
   children,
+  fixedBackground,
 }: Props): JSX.Element => {
   const styles = defaultLayoutStyles();
 
@@ -29,6 +30,7 @@ export const DefaultLayout = ({
     <Box sx={styles.root}>
       <Seo data={seo} />
       <Header data={headerData} />
+      {fixedBackground}
       <Box>{children}</Box>
       <Footer data={footerData} />
       <Sounds />

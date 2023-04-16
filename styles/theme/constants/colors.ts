@@ -28,15 +28,15 @@ declare module "@mui/material/LinearProgress" {
 }
 
 export const PRIMARY = {
-  light: alpha("#83577d", 0.2),
-  main: "#642e5d",
-  dark: "#462041",
+  light: "#e63b77",
+  main: "#E00B55",
+  dark: "#9c073b",
 };
 // TODO: define what is secondary
 export const SECONDARY = {
-  light: alpha("#737ba2", 0.2),
-  main: "#505a8b",
-  dark: "#383e61",
+  light: "#44474a",
+  main: "#16191D",
+  dark: "#0f1114",
 };
 
 export const ACCENT = {
@@ -70,16 +70,9 @@ export const WARNING = {
 };
 
 export const GREY = {
-  50: "#F7FBFF",
-  100: "#FFFFFF",
-  200: "#98A6B9",
-  300: "#656E79",
-  400: "#515B68",
-  500: "#393F47",
-  600: "#252A31",
-  700: "#1A1E23",
-  800: "#121418",
-  900: "#14171C",
+  light: "#999999",
+  main: "#808080",
+  dark: "#595959",
   A100: "#FFFFFF",
   A200: "#98A6B9",
   A400: "#515B68",

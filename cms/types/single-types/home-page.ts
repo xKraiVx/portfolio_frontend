@@ -1,4 +1,4 @@
-import { TPageWidget } from "@cms/types/page-widgets/page-widget";
+import { TPageWidget } from "@cms/types/widgets/widget.type";
 import { ISeo } from "../general/seo";
 import { IStrapiNode } from "../general/strapi-node";
 

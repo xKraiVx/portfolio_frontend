@@ -1,4 +1,4 @@
-import { ELocalization } from "@cms/types/general/enums/localization";
+import { ELocalization } from "@cms/types/general/enums/localization.enum";
 import { POST_PER_PAGE } from "@common/constants/postPerPage.constant";
 import { seoQuery } from "../components/shared/seo-query";
 import { mediaQuery } from "../general/media-query";

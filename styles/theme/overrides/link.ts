@@ -5,6 +5,7 @@ export default function Link(theme: Theme): Components {
     MuiLink: {
       styleOverrides: {
         root: {
+          textDecoration: "none",
           color: theme.palette.text.primary,
         },
       },

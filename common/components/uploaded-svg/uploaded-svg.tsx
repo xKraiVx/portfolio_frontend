@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { isExternalLink } from "@common/utils/is-external-link";
 import cn from "classnames";
+import { Box } from "@mui/material";
 
 interface Props {
   url?: string;
@@ -34,8 +35,15 @@ export const UploadedSvg = ({ url, width, height, className }: Props) => {
   }, [fullPath]);
 
   return (
-    <div
-      style={{ width, height }}
+    <Box
+      sx={{
+        width,
+        height,
+        svg: {
+          width: "100%",
+          height: "100%",
+        },
+      }}
       className={cn(className, "svg-embed", {
         "svg-embed--loaded": isLoaded,
         "svg-embed--loading": !isLoaded,

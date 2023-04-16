@@ -1,5 +1,5 @@
-import { TMediaN } from "../general/media-normalized";
-import { IDefaultWidgetN } from "../general/default-widget-normalized";
+import { TMediaN } from "../../general/media-normalized";
+import { IDefaultWidgetN } from "../../general/default-widget-normalized";
 
 interface IHeroSlideN {
   text?: string;

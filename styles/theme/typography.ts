@@ -86,9 +86,9 @@ export const typography: TypographyOptions = {
     fontWeight: 400,
   },
   button: {
-    fontSize: pxToRem(18),
-    lineHeight: 24 / 18,
-    fontWeight: 600,
+    fontSize: pxToRem(24),
+    lineHeight: 32 / 24,
+    fontWeight: 700,
     textTransform: "none" as React.CSSProperties["textTransform"],
   },
 };
