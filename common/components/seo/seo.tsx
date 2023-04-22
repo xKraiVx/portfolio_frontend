@@ -38,7 +38,9 @@ export const Seo = ({ data }: Props): JSX.Element => {
 
       {metaRobots && <meta name="robots" content={metaRobots} />}
       {metaDescription && <meta name="description" content={metaDescription} />}
-      {updateAt && <meta property="article:modified_time" content={updateAt} />}
+      {updateAt && (
+        <meta property="article:modified_time" content={String(updateAt)} />
+      )}
 
       {facebookMeta && (
         <>

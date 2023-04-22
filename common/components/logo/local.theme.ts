@@ -1,9 +1,8 @@
-import { Theme, alpha } from "@mui/material";
+import { Theme } from "@mui/material";
 
-export const localTheme = (theme: Theme) => ({
+export const localTheme = (theme: Theme, isHomePage: boolean) => ({
   root: {
     cursor: "pointer",
-    position: "relative",
     boxShadow: `inset ${theme.spacing(1 / 2, 1 / 2, 1 / 2)} ${
       theme.palette.secondary.dark
     }, inset ${theme.spacing(-1 / 4, -1 / 4, 1 / 2)} ${
@@ -41,6 +40,7 @@ export const localTheme = (theme: Theme) => ({
     display: "inline-block",
     transformOrigin: "bottom",
     transition: "transform .3s ease",
+    pointerEvents: isHomePage ? "none" : "auto",
   },
   logo_wrapper: {
     position: "relative",

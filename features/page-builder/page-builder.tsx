@@ -23,7 +23,9 @@ export const PageBuilder: ComponentType<Props> = ({ widgets }) => {
 
         const DynamicTemplate = widgetTemplates[template];
 
-        return <DynamicTemplate key={key} data={widget} />;
+        return (
+          <DynamicTemplate key={key} data={widget} widgets={widgets} id={key} />
+        );
       })}
     </Box>
   );

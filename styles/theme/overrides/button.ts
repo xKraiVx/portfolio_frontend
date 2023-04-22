@@ -1,10 +1,7 @@
-import { useDeviceQuery } from "@common/hooks/use-device-query";
 import { pxToRem } from "@common/utils/font.utils";
-import { alpha, Components, Theme } from "@mui/material";
+import { Components, Theme } from "@mui/material";
 
 export default function Button(theme: Theme): Components {
-  const { isMobile, isTablet } = useDeviceQuery();
-
   return {
     MuiButton: {
       styleOverrides: {

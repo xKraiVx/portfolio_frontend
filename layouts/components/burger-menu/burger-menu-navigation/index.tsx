@@ -13,6 +13,7 @@ import { ILinkComponentN } from "@cms/normalized-types/components/link-component
 
 import cn from "classnames";
 import { motion } from "framer-motion";
+import { localTheme } from "./local.theme";
 
 interface BurgerMenuNavigationProps {
   data?: ILinkComponentN[];
@@ -37,6 +38,7 @@ export const BurgerMenuNavigation = ({
 }: BurgerMenuNavigationProps): JSX.Element => {
   const { pathname } = useRouter();
   const theme = useTheme();
+  const styles = localTheme(theme);
 
   if (!data) return null;
 
@@ -55,7 +57,10 @@ export const BurgerMenuNavigation = ({
               {!!href ? (
                 <NextLink href={href}>
                   <Button
-                    sx={{ minWidth: theme.spacing(25) }}
+                    sx={{
+                      ...styles.link,
+                      ...(pathname === href && styles.current_link),
+                    }}
                     size="large"
                     className={cn({ "current-link": pathname === href })}
                   >

@@ -5,6 +5,7 @@ import { UploadedSvg } from "../uploaded-svg/uploaded-svg";
 
 import styles from "./logo.module.scss";
 import { localTheme } from "./local.theme";
+import { useRouter } from "next/router";
 
 interface Props {
   data: ILogoComponentN;
@@ -12,14 +13,17 @@ interface Props {
 }
 export const Logo = ({ data, sx }: Props) => {
   const theme = useTheme();
-  const styles = localTheme(theme);
+  const { pathname } = useRouter();
+  const styles = localTheme(theme, pathname === "/");
+
   const { image, href } = data;
+
   return (
     <Box
       sx={{
-        position: "relative",
         ...styles.root,
         ...sx,
+        position: "relative",
       }}
     >
       <NextLink href={href}>

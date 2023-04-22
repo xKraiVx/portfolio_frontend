@@ -12,7 +12,12 @@ const Home: NextPage<IHomeN> = (data) => {
   const { widgets, seo } = homePage || {};
 
   return (
-    <DefaultLayout headerData={header} seo={seo} footerData={footer}>
+    <DefaultLayout
+      headerData={header}
+      seo={seo}
+      footerData={footer}
+      widgets={widgets}
+    >
       <PageBuilder widgets={widgets} />
     </DefaultLayout>
   );

@@ -27,18 +27,6 @@ const BASE_FONT = "'Blogger sans', sans-serif";
 
 export const typography: TypographyOptions = {
   fontFamily: BASE_FONT,
-  h1: {
-    fontSize: pxToRem(96),
-    lineHeight: 116 / 96,
-    fontWeight: 700,
-    letterSpacing: 0,
-  },
-  h2: {
-    fontSize: pxToRem(64),
-    lineHeight: 77 / 64,
-    fontWeight: 700,
-  },
-
   h3: {
     fontSize: pxToRem(48),
     lineHeight: 58 / 48,

@@ -15,7 +15,7 @@ export default function IconButton(theme: Theme): Components {
             theme.palette.primary.main
           }`,
           "&:hover": {
-            "&:before, >*": {
+            "&:before, >svg": {
               transform: "scale(0.8)",
               background: theme.palette.grey[800],
               color: theme.palette.primary.light,
@@ -26,8 +26,8 @@ export default function IconButton(theme: Theme): Components {
             position: "absolute",
             top: -1,
             left: -1,
-            width: "103%",
-            height: "103%",
+            width: "105%",
+            height: "105%",
             background: theme.palette.secondary.light,
             transition: "all .3s ease-out",
             borderRadius: "50%",

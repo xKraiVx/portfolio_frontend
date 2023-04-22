@@ -1,24 +1,63 @@
 import { IInitialN } from "@cms/normalized-types/widgets/global-widgets/initial-normalized.type";
-import { NextImage } from "@common/components/next-image/next-image";
-import { Box, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { Link as ScrollLink } from "react-scroll";
+import { localTheme } from "./local.theme";
+import { TextLink } from "@common/components/text-link";
+import { WomenSignIcon } from "@styles/theme/icons";
+import { css } from "@emotion/css";
+import { bounceDown } from "@common/keyframes/bounceDown";
+import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
 
 interface Props {
   data: IInitialN;
+  widgets: TWidgetN[];
+  id: number;
 }
 
-export const Initial = ({ data }: Props) => {
-  const { title, background } = data,
+export const Initial = ({ data, widgets, id }: Props) => {
+  const theme = useTheme();
+  const styles = localTheme(theme);
+  const { title, background, link, link_text, navigation_id } = data,
     { url, width, height, alternativeText } = background;
+
+  const nextSectionIdentificator = widgets[id + 1]?.navigation_id.identificator;
+
   return (
-    <Box component="section" sx={{ minHeight: "100vh", paddingTop: 15 }}>
+    <Box component="section" sx={styles.root} id={navigation_id.identificator}>
       <Container>
-        <Typography variant="h3">{title}</Typography>
-        <NextImage
+        <Stack alignItems="center">
+          <Typography variant="h1" sx={styles.title}>
+            {title}
+            <TextLink text={link_text} href={link} animate={true} />
+          </Typography>
+          {nextSectionIdentificator && (
+            <ScrollLink smooth={true} to={nextSectionIdentificator}>
+              <IconButton
+                className={css`
+                  animation: ${bounceDown} 1s ease infinite alternate;
+                `}
+                size="large"
+                sx={styles.scroll_down}
+              >
+                <WomenSignIcon />
+              </IconButton>
+            </ScrollLink>
+          )}
+        </Stack>
+
+        {/* <NextImage
           src={url}
           width={width}
           height={height}
           alt={alternativeText}
-        />
+        /> */}
       </Container>
     </Box>
   );

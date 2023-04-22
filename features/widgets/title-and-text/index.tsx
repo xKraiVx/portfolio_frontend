@@ -7,9 +7,13 @@ interface Props {
 }
 
 export const TitleAndText = ({ data }: Props) => {
-  const { title, text } = data;
+  const { title, text, navigation_id } = data;
   return (
-    <Box component="section" sx={{ minHeight: "100vh", paddingTop: 15 }}>
+    <Box
+      component="section"
+      sx={{ minHeight: "100vh", paddingTop: 15 }}
+      id={navigation_id.identificator}
+    >
       <Container>
         <Typography variant="h3">{title}</Typography>
         <TextEditor data={text} />

@@ -3,11 +3,13 @@ import { formatWidgetName } from "@common/utils/format-widget-name/format-widget
 import { normalizeImage } from "../general/normalize-image";
 import { IInitialN } from "@cms/normalized-types/widgets/global-widgets/initial-normalized.type";
 import { IInitial } from "@cms/types/widgets/global-widgets/initial.type";
+import { normalizeNavigationId } from "../components/normalize-navigation-id";
 
 export type TNormilizeInitial = (data: IInitial) => IInitialN;
 
 export const normalizeInitial: TNormilizeInitial = (data) => {
-  const { __typename, title, background } = data || {},
+  const { __typename, title, background, link, link_text, navigation_id } =
+      data || {},
     normalizedBackground = background ? normalizeImage(background) : null;
 
   return {
@@ -15,5 +17,8 @@ export const normalizeInitial: TNormilizeInitial = (data) => {
     template: formatWidgetName(__typename),
     title,
     background: normalizedBackground,
+    link,
+    link_text,
+    navigation_id: normalizeNavigationId(navigation_id),
   };
 };
