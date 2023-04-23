@@ -6,6 +6,7 @@ import { UploadedSvg } from "../uploaded-svg/uploaded-svg";
 import styles from "./logo.module.scss";
 import { localTheme } from "./local.theme";
 import { useRouter } from "next/router";
+import { LogoIcon } from "@styles/theme/icons";
 
 interface Props {
   data: ILogoComponentN;
@@ -31,7 +32,8 @@ export const Logo = ({ data, sx }: Props) => {
           <Stack flexDirection="row" alignItems="center">
             <Box sx={styles.logo_wrapper}>
               <Box className="logo" sx={styles.logo}>
-                <UploadedSvg url={image.url} width={80} height={80} />
+                {/* <UploadedSvg url={image.url} width={80} height={80} /> */}
+                <LogoIcon />
               </Box>
             </Box>
             <Stack>

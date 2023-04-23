@@ -14,6 +14,16 @@ export const CloseIcon = (props: SvgIconProps) => {
     </SvgIcon>
   );
 };
+export const LogoIcon = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props} viewBox="0 0 512 512">
+      <path
+        d="m 256 16 a 1 1 0 0 0 0 480 a 1 1 0 0 0 0 -480 M 128 448 a 1 1 0 0 0 240 -368 a 1 1 0 0 0 -240 368 m 8 -8 a 1 1 0 0 0 208 -336 a 1 1 0 0 0 -208 336"
+        fill="currentColor"
+      />
+    </SvgIcon>
+  );
+};
 
 export const WomenSignIcon = (props: SvgIconProps) => {
   return (

@@ -1,4 +1,5 @@
 import { ITitleAndTextN } from "@cms/normalized-types/widgets/global-widgets/title-and-text.type";
+import { SectionTitle } from "@common/components/section-title";
 import { TextEditor } from "@common/components/text-editor/text-editor";
 import { Box, Container, Typography } from "@mui/material";
 
@@ -15,7 +16,7 @@ export const TitleAndText = ({ data }: Props) => {
       id={navigation_id.identificator}
     >
       <Container>
-        <Typography variant="h3">{title}</Typography>
+        <SectionTitle>{title}</SectionTitle>
         <TextEditor data={text} />
       </Container>
     </Box>

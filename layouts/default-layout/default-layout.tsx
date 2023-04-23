@@ -1,15 +1,19 @@
 import { ReactNode } from "react";
-import { Header } from "@layouts/components/header";
+import { motion } from "framer-motion";
 import { Box } from "@mui/material";
-import { defaultLayoutStyles } from "./default-layout.theme";
-import { Sounds } from "@layouts/components/sounds/sounds";
+
+import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
 import { IHeaderN } from "@cms/normalized-types/single-types/header-normalized";
 import { ISeoN } from "@cms/normalized-types/general/seo-normalized";
-import { Seo } from "@common/components/seo/seo";
 import { IFooterN } from "@cms/normalized-types/single-types/footer-normalized.type";
+
+import { Seo } from "@common/components/seo/seo";
+
+import { Header } from "@layouts/components/header";
+import { Sounds } from "@layouts/components/sounds/sounds";
 import { Footer } from "@layouts/components/footer/footer";
-import { motion } from "framer-motion";
-import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
+
+import { defaultLayoutStyles } from "./default-layout.theme";
 
 interface Props {
   headerData?: IHeaderN;

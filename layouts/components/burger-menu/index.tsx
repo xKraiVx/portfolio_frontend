@@ -7,6 +7,7 @@ import { ELocalization } from "@cms/types/general/enums/localization.enum";
 import { ILinkComponentN } from "@cms/normalized-types/components/link-component-normalized";
 import { BurgerMenuNavigation } from "./burger-menu-navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useScrollTrigger } from "@common/hooks/use-scroll-trigger";
 
 const locales = {
   EN: ELocalization.EN,
@@ -30,11 +31,17 @@ export const BurgerMenu = ({ data }: BurgerMenuProps): JSX.Element => {
   const router = useRouter();
   const burgerButton = useRef(null);
 
+  const { blockScroll, enableScroll } = useScrollTrigger();
+
   const { pathname, asPath, query } = router;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    isMenuOpen ? blockScroll() : enableScroll();
+  }, [isMenuOpen]);
 
   /*   const handleToggleLocalization = () => {
     if (router.locale === locales.EN) {

@@ -4,6 +4,8 @@ import { Container, Stack, useTheme, IconButton, Box } from "@mui/material";
 import { Logo } from "@common/components/logo";
 import { BurgerMenu } from "../burger-menu";
 import { IHeaderN } from "@cms/normalized-types/single-types/header-normalized";
+import { useScrollTrigger } from "@common/hooks/use-scroll-trigger";
+import cn from "classnames";
 
 interface Props {
   data?: IHeaderN;
@@ -15,9 +17,11 @@ export const Header: FunctionComponent<Props> = ({ data }) => {
 
   const { menu, logo } = data || {};
 
+  const { isScrolledDown } = useScrollTrigger();
+
   return (
-    <Box sx={styles.root}>
-      <Container maxWidth={false}>
+    <Box sx={styles.root} className={cn({ hidden: isScrolledDown })}>
+      <Container maxWidth={false} sx={styles.container}>
         <Stack
           flexDirection="row"
           justifyContent="space-between"

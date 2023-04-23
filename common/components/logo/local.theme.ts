@@ -2,6 +2,7 @@ import { Theme } from "@mui/material";
 
 export const localTheme = (theme: Theme, isHomePage: boolean) => ({
   root: {
+    p: 1,
     cursor: "pointer",
     boxShadow: `inset ${theme.spacing(1 / 2, 1 / 2, 1 / 2)} ${
       theme.palette.secondary.dark
@@ -38,35 +39,36 @@ export const localTheme = (theme: Theme, isHomePage: boolean) => ({
   },
   link: {
     display: "inline-block",
-    transformOrigin: "bottom",
     transition: "transform .3s ease",
     pointerEvents: isHomePage ? "none" : "auto",
   },
   logo_wrapper: {
     position: "relative",
-    width: "80px",
-    height: "80px",
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+    [theme.breakpoints.down("md")]: {
+      width: theme.spacing(5),
+      height: theme.spacing(5),
+    },
   },
   logo: {
     position: "absolute",
     top: 0,
     left: 0,
     width: "100%",
-    height: "100px",
+    height: "100%",
+    svg: {
+      width: "100%",
+      height: "100%",
+    },
   },
   word: {
     lineHeight: "1rem",
     ":first-letter": {
       fontWeight: 700,
     },
-    "&:first-of-type": {
-      transform: "translateX(-10px)",
-    },
-    "&:last-of-type": {
-      transform: "translateX(-10px)",
-    },
-
     "&:nth-last-of-type(2)": {
+      transform: "translateX(5px)",
       fontWight: 700,
     },
   },

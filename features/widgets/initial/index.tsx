@@ -14,6 +14,7 @@ import { WomenSignIcon } from "@styles/theme/icons";
 import { css } from "@emotion/css";
 import { bounceDown } from "@common/keyframes/bounceDown";
 import { TWidgetN } from "@cms/normalized-types/widgets/widget-normalized";
+import { SectionTitle } from "@common/components/section-title";
 
 interface Props {
   data: IInitialN;
@@ -33,10 +34,10 @@ export const Initial = ({ data, widgets, id }: Props) => {
     <Box component="section" sx={styles.root} id={navigation_id.identificator}>
       <Container>
         <Stack alignItems="center">
-          <Typography variant="h1" sx={styles.title}>
+          <SectionTitle variant="h1">
             {title}
             <TextLink text={link_text} href={link} animate={true} />
-          </Typography>
+          </SectionTitle>
           {nextSectionIdentificator && (
             <ScrollLink smooth={true} to={nextSectionIdentificator}>
               <IconButton

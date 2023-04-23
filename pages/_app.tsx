@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import { Router } from "next/router";
 import { useEffect, useState } from "react";
 import { PageTransitionProvider } from "providers/page-transition.provider";
+import { ScrollTriggerProvider } from "providers/scroll-trigger/scroll-trigger.provider";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -30,7 +31,9 @@ function MyApp({
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <PageTransitionProvider>
-          <Component {...pageProps} />
+          <ScrollTriggerProvider>
+            <Component {...pageProps} />
+          </ScrollTriggerProvider>
         </PageTransitionProvider>
       </UiThemeProvider>
     </CacheProvider>
