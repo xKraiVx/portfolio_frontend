@@ -3,11 +3,14 @@ import PostsList from "@features/widgets/posts-list/posts-list";
 import { DefaultLayout } from "@layouts/default-layout/default-layout";
 import { Container, Typography } from "@mui/material";
 import { blogPageApi } from "@requests/blog-page.api";
+import { homePageApi } from "@requests/home-page.api";
 import { GetStaticProps, NextPage } from "next";
 
 const Blog: NextPage<IBlogN> = (data) => {
   const { header, blogPage, posts } = data;
   const { seo, title } = blogPage || {};
+
+  homePageApi.getHomePage("en");
 
   return (
     <DefaultLayout headerData={header} seo={seo}>

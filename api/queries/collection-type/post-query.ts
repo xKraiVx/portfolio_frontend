@@ -32,14 +32,6 @@ export const postBySlugQuery = (locale: string, postSlug: string) => `
                         }
                     }
                 }
-                tags {
-                    data{
-                        attributes{
-                            name
-                            slug
-                        }
-                    }
-                }
             }
         }
     }
@@ -53,19 +45,12 @@ export const postsQuery = (locale: string, page: number) => `
             attributes {
                 slug
                 title
+                updatedAt
                 featured_image {
                     ${mediaQuery}
                 }
                 description
                 category{
-                    data{
-                        attributes{
-                            name
-                            slug
-                        }
-                    }
-                }
-                tags {
                     data{
                         attributes{
                             name

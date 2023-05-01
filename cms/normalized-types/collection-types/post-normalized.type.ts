@@ -10,7 +10,7 @@ export interface IPostPreviewN {
   slug: string;
   featuredImage?: TMediaN | null;
   category: string;
-  tags: any;
+  updatedAt: Date;
 }
 
 export interface IPostN {
@@ -19,7 +19,6 @@ export interface IPostN {
   slug: string;
   featuredImage?: TMediaN | null;
   category: string;
-  tags: any;
   seo: ISeoN;
 }
 

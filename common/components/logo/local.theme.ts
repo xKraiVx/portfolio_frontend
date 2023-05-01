@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const localTheme = (theme: Theme, isHomePage: boolean) => ({
+export const localTheme = (theme: Theme) => ({
   root: {
     p: 1,
     cursor: "pointer",
@@ -40,7 +40,6 @@ export const localTheme = (theme: Theme, isHomePage: boolean) => ({
   link: {
     display: "inline-block",
     transition: "transform .3s ease",
-    pointerEvents: isHomePage ? "none" : "auto",
   },
   logo_wrapper: {
     position: "relative",

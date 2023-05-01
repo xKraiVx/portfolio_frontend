@@ -21,7 +21,6 @@ export interface IPostData {
   seo: ISeo;
   title: string;
   slug: string;
-  tags: any;
 }
 
 export type TPosts = IStrapiCollectionNode<IPostData>;
@@ -32,7 +31,7 @@ export interface IPostPreviewData {
   featured_image: TMedia;
   title: string;
   slug: string;
-  tags: any;
+  updatedAt: Date;
 }
 
 export type TPostPreviews = IStrapiCollectionNode<IPostPreviewData>;

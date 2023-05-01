@@ -1,12 +1,12 @@
 import { ILogoComponentN } from "@cms/normalized-types/components/logo-component-normalized";
 import { Box, Link, Stack, SxProps, Typography, useTheme } from "@mui/material";
 import NextLink from "next/link";
-import { UploadedSvg } from "../uploaded-svg/uploaded-svg";
+import { animateScroll } from "react-scroll";
 
-import styles from "./logo.module.scss";
 import { localTheme } from "./local.theme";
 import { useRouter } from "next/router";
 import { LogoIcon } from "@styles/theme/icons";
+import { useMemo } from "react";
 
 interface Props {
   data: ILogoComponentN;
@@ -15,9 +15,16 @@ interface Props {
 export const Logo = ({ data, sx }: Props) => {
   const theme = useTheme();
   const { pathname } = useRouter();
-  const styles = localTheme(theme, pathname === "/");
+  const styles = localTheme(theme);
+
+  const isAnchor = useMemo(() => pathname === "/", [pathname]);
 
   const { image, href } = data;
+
+  const handleAnchorClick = (e) => {
+    e.preventDefault();
+    animateScroll.scrollToTop();
+  };
 
   return (
     <Box
@@ -28,7 +35,7 @@ export const Logo = ({ data, sx }: Props) => {
       }}
     >
       <NextLink href={href}>
-        <Link sx={styles.link}>
+        <Link sx={styles.link} onClick={isAnchor && handleAnchorClick}>
           <Stack flexDirection="row" alignItems="center">
             <Box sx={styles.logo_wrapper}>
               <Box className="logo" sx={styles.logo}>

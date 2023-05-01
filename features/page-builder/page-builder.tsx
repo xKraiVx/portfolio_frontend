@@ -17,11 +17,12 @@ export const PageBuilder: ComponentType<Props> = ({ widgets }) => {
       {widgets.map((widget, key) => {
         const template = widget?.template;
 
-        if (!template) {
+        const DynamicTemplate = widgetTemplates?.[template];
+
+        if (!DynamicTemplate) {
+          console.error(`Template ${template} does not exist!`);
           return null;
         }
-
-        const DynamicTemplate = widgetTemplates[template];
 
         return (
           <DynamicTemplate key={key} data={widget} widgets={widgets} id={key} />

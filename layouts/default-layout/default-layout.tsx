@@ -21,7 +21,7 @@ interface Props {
   children?: ReactNode | ReactNode[];
   footerData?: IFooterN;
   fixedBackground?: ReactNode;
-  widgets: TWidgetN[];
+  widgets?: TWidgetN[];
 }
 
 export const DefaultLayout = ({

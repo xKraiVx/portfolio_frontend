@@ -5,15 +5,16 @@ import {
 } from "@cms/normalized-types/collection-types/post-normalized.type";
 import {
   IPostData,
+  IPostPreviewData,
   IPostSlugs,
   TPostPreviews,
 } from "@cms/types/collection-types/post.type";
 import { normalizeImage } from "../general/normalize-image";
 import { normalizeSeo } from "../general/normalize-seo";
+import { IStrapiNodeData } from "@cms/types/general/strapi-node";
 
 export const normalizePost = (postData: IPostData): IPostN => {
-  const { title, slug, category, tags, description, featured_image, seo } =
-    postData;
+  const { title, slug, category, description, featured_image, seo } = postData;
   const normalizedImage = normalizeImage(featured_image);
   const normalizedSeo = normalizeSeo(seo);
 
@@ -21,29 +22,33 @@ export const normalizePost = (postData: IPostData): IPostN => {
     title,
     slug,
     category,
-    tags,
     description,
     seo: normalizedSeo,
     featuredImage: normalizedImage,
   };
 };
+
+export const normalizePostPreviewsData = (
+  post: IStrapiNodeData<IPostPreviewData>
+) => {
+  const { title, slug, category, featured_image, description, updatedAt } =
+    post.attributes;
+  const normalizedImage = normalizeImage(featured_image);
+  return {
+    title,
+    slug,
+    category,
+    description,
+    updatedAt,
+    featuredImage: normalizedImage,
+  };
+};
+
 export const normalizePostPreviews = (
   postData: TPostPreviews
 ): IPostsPreviewsN => {
   const { meta, data } = postData;
-  const normalizedData = data.map((post) => {
-    const { title, slug, category, tags, featured_image, description } =
-      post.attributes;
-    const normalizedImage = normalizeImage(featured_image);
-    return {
-      title,
-      slug,
-      category,
-      tags,
-      description,
-      featuredImage: normalizedImage,
-    };
-  });
+  const normalizedData = data.map((post) => normalizePostPreviewsData(post));
 
   return {
     postsPreviews: normalizedData,

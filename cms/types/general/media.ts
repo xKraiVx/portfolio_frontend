@@ -1,4 +1,4 @@
-import { IStrapiNode } from "./strapi-node";
+import { IStrapiCollectionNode, IStrapiNode } from "./strapi-node";
 
 export interface IMediaFormat {
   ext: string;
@@ -33,3 +33,4 @@ export interface IMediaData {
 }
 
 export type TMedia = IStrapiNode<IMediaData>;
+export type TMediaCollection = IStrapiCollectionNode<IMediaData>;
