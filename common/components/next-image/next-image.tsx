@@ -1,10 +1,11 @@
+import { Box } from "@mui/material";
 import Image, { ImageProps } from "next/image";
 // import { getMedia } from 'common/utils/media/media';
 
 //TODO:(HIGHT) Fix image for static or upload images
 
 interface Props extends ImageProps {
-  onLoad?: () => void;
+  onLoad?: (e: any) => void;
   className?: string;
 }
 
@@ -28,16 +29,11 @@ export const NextImage = ({
     isUploadedImage = src.includes("/uploads/");
   }
 
-  /* const loader = ({ src, width }: any) => {
-        return getMedia(`${src}?w=${width}`);
-    }; */
-
   if (!width || !height) {
     return (
       <Image
-        onLoad={() => onLoad?.()}
+        onLoadingComplete={(e) => onLoad?.(e)}
         className={props.className}
-        // loader={loader}
         layout="fill"
         src={!isUploadedImage ? src : `${path}${src}`}
         alt={alt || ""}
@@ -48,9 +44,8 @@ export const NextImage = ({
 
   return (
     <Image
-      onLoad={() => onLoad?.()}
+      onLoadingComplete={(e) => onLoad?.(e)}
       className={props.className}
-      // loader={loader}
       width={width}
       height={height}
       src={!isUploadedImage ? src : `${path}${src}`}

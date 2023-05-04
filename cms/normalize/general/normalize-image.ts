@@ -9,7 +9,6 @@ export const normalizeImage = (res: TMedia): TMediaN => {
 };
 export const normalizeMediaCollection = (res: TMediaCollection): TMediaN[] => {
   const data = res?.data?.map((image) => image.attributes);
-  return {
-    ...data,
-  };
+
+  return data;
 };

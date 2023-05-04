@@ -1,21 +1,9 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { IScrollTrigger } from "./scroll-trigger.types";
+import { throttle } from "@common/utils/throttle";
 
 interface ScrollTriggerProps {
   children?: ReactNode;
-}
-
-function throttle(callbackFn, limit) {
-  let wait = false;
-  return function () {
-    if (!wait) {
-      callbackFn.call();
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-      }, limit);
-    }
-  };
 }
 
 export const ScrollTriggerContext = createContext<IScrollTrigger | null>(null);
