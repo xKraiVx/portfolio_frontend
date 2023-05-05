@@ -10,8 +10,7 @@ import {
 } from "react";
 import { IMediaData } from "@cms/types/general/media";
 import { Honeycomb } from "../honeycomb";
-import { throttle } from "@common/utils/throttle";
-import { log } from "console";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface HoneycombsListProps {
   images: TMediaN[];
@@ -26,7 +25,6 @@ export const HoneycombsList = ({
   pageSize,
   countPerRow,
 }: HoneycombsListProps): JSX.Element => {
-  const [page, setPage] = useState(1);
   const [sectionTranslate, setSectionTranslate] = useState({ x: 0, y: 0 });
   const theme = useTheme();
   const rootElement = useRef<HTMLElement>(null);
@@ -43,7 +41,7 @@ export const HoneycombsList = ({
         currentRow.push(image);
         return rows;
       }, []),
-    [page, pageSize, countPerRow]
+    [pageSize, countPerRow]
   );
 
   const currentTranslate = useMemo(
@@ -75,6 +73,18 @@ export const HoneycombsList = ({
     return () => clearTimeout(throttleTimer.current);
   }, []);
 
+  const honeyCombContainer = {
+    show: {
+      transition: {
+        type: "spring",
+        bounce: 5,
+        duration: 0.7,
+        delayChildren: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   const styles = localTheme(theme, countPerRow, currentImages.length, 2);
   return (
     <Box
@@ -88,9 +98,15 @@ export const HoneycombsList = ({
       <Box sx={styles.wrapper}>
         {currentImages.map((row, idx) => (
           <Box key={`row-${idx}`} sx={styles.row}>
-            {row.map((image) => (
-              <Honeycomb key={image.hash} image={image} sx={styles.item} />
-            ))}
+            <motion.div
+              variants={honeyCombContainer}
+              initial="hidden"
+              animate="show"
+            >
+              {row.map((image) => (
+                <Honeycomb key={image.hash} image={image} sx={styles.item} />
+              ))}
+            </motion.div>
           </Box>
         ))}
       </Box>

@@ -22,14 +22,14 @@ export const localTheme = (
       const yGap = theme.spacing(offset * rowIdx);
 
       if (isOdd(rowIdx)) {
-        styles[`&:nth-of-type(${rowIdx + 1})`] = {
+        styles[`&:nth-of-type(${rowIdx + 1}) > div`] = {
           transform: `translate(calc(${galleryWrapperWidth}vw / (${countPerRow} * 4)), calc(${yOffset}vw + ${yGap}))`,
           // mt: `calc(${yOffset}vw + ${yGap})`,
         };
         return styles;
       }
 
-      styles[`&:nth-of-type(${rowIdx + 1})`] = {
+      styles[`&:nth-of-type(${rowIdx + 1}) > div`] = {
         transform: `translate(calc(-${galleryWrapperWidth}vw / (${countPerRow} * 4)), calc(${yOffset}vw + ${yGap}))`,
         // mt: `calc(${yOffset}vw + ${yGap})`,
       };
@@ -41,7 +41,7 @@ export const localTheme = (
   return {
     root: {
       position: "relative",
-      transition: "transform 3s ease-in-out",
+      transition: "all 2s ease-in-out",
       height: `calc(${wrapperHeight}vw + ${theme.spacing(
         offset * (rowCount - 1)
       )})`,
@@ -54,10 +54,12 @@ export const localTheme = (
       transform: "translateX(-50%)",
     },
     row: {
-      display: "grid",
-      gridTemplateColumns: `repeat(${countPerRow}, 1fr)`,
-      gap: themeOffset,
       ...rowStyle(),
+      "> div": {
+        display: "grid",
+        gridTemplateColumns: `repeat(${countPerRow}, 1fr)`,
+        gap: themeOffset,
+      },
     },
     item: {
       height: `${itemHeight}vw`,
