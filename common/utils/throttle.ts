@@ -1,6 +1,5 @@
 export const throttle = (callbackFn, limit) => {
   let wait = false;
-  console.log("THROTTLE");
 
   return () => {
     if (!wait) {
