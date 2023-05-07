@@ -13,17 +13,15 @@ gsap.registerPlugin(ScrollTrigger);
 interface TextLinkProps extends PropsWithRef<any> {
   href: string;
   text: string;
-  animate?: boolean;
 }
 
-export const TextLink = ({ href, text, animate, ref }: TextLinkProps) => {
+export const TextLink = ({ href, text }: TextLinkProps) => {
   const theme = useTheme();
   const styles = localTheme(theme);
   const link = useRef(null);
   const [animateButton, setAnimateButton] = useState(false);
 
   useEffect(() => {
-    console.log(link);
     gsap.fromTo(
       link.current,
       {},
@@ -57,10 +55,11 @@ export const TextLink = ({ href, text, animate, ref }: TextLinkProps) => {
       <Link
         ref={link}
         className={
-          animateButton &&
-          css`
-            animation: ${textShadowGlitch(theme)} 1s 1s ease forwards;
-          `
+          animateButton
+            ? css`
+                animation: ${textShadowGlitch(theme)} 1s 1s ease forwards;
+              `
+            : ""
         }
         sx={styles.root}
       >

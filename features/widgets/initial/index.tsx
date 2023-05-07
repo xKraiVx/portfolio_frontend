@@ -36,7 +36,7 @@ export const Initial = ({ data, widgets, id }: Props) => {
         <Stack alignItems="center">
           <SectionTitle variant="h1">
             {title}
-            <TextLink text={link_text} href={link} animate={true} />
+            <TextLink text={link_text} href={link} />
           </SectionTitle>
           {nextSectionIdentificator && (
             <ScrollLink smooth={true} to={nextSectionIdentificator}>
